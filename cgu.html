@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conditions Générales d'Utilisation — CoinCarrière BTP</title>
+  <meta name="description" content="Conditions Générales d'Utilisation de la plateforme CoinCarrière BTP.">
+  <meta name="robots" content="noindex">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#050F1A">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand:       '#0077B6',
+            'brand-dark':'#005a8a',
+            'brand-ink': '#052238',
+            lime:        '#b4dc02',
+            paper:       '#FAFAF7',
+            ink:         '#0A0F1A',
+          },
+          fontFamily: {
+            display: ['Sora','sans-serif'],
+            body:    ['Inter','sans-serif'],
+            mono:    ['JetBrains Mono','monospace'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #FAFAF7; color: #1a2a3a; }
+
+    /* ── Nav ── */
+    .legal-nav {
+      background: #052238;
+      padding: 0 clamp(20px,4vw,60px);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .legal-nav a.back {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .legal-nav a.back:hover { color: rgba(255,255,255,0.8); }
+
+    /* ── Page header ── */
+    .legal-hero {
+      background: #052238;
+      padding: clamp(40px,6vw,80px) clamp(20px,4vw,60px) clamp(32px,5vw,64px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .legal-hero .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #b4dc02;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .legal-hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(26px, 4vw, 44px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .legal-hero .date {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.38);
+    }
+
+    /* ── Content ── */
+    .legal-body {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: clamp(40px,6vw,72px) clamp(20px,4vw,40px);
+    }
+
+    /* Table of contents */
+    .toc {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+    .toc-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #0077B6;
+      margin-bottom: 14px;
+    }
+    .toc ol {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 24px;
+    }
+    @media (max-width: 600px) { .toc ol { grid-template-columns: 1fr; } }
+    .toc li a {
+      font-size: 13px;
+      color: #3a5a7a;
+      text-decoration: none;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .toc li a:hover { color: #0077B6; }
+    .toc li a .toc-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #94a3b8;
+      min-width: 18px;
+    }
+
+    /* Sections */
+    .legal-section {
+      margin-bottom: 48px;
+      padding-top: 8px;
+    }
+    .legal-section h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #052238;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .legal-section h2 .sec-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      color: #0077B6;
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+    }
+    .legal-section h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e3a5a;
+      margin: 20px 0 10px;
+    }
+    .legal-section p {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: #334155;
+      margin-bottom: 12px;
+    }
+    .legal-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 16px;
+    }
+    .legal-section ul li {
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: #334155;
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 6px;
+    }
+    .legal-section ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: #0077B6;
+      font-size: 12px;
+    }
+    .legal-section a {
+      color: #0077B6;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0,119,182,0.25);
+      transition: border-color 0.2s;
+    }
+    .legal-section a:hover { border-color: #0077B6; }
+
+    /* Contact card */
+    .contact-card {
+      background: #f0f7ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-top: 16px;
+    }
+    .contact-card p {
+      margin-bottom: 4px !important;
+    }
+
+    /* ── Footer ── */
+    .legal-footer {
+      background: #052238;
+      padding: 32px clamp(20px,4vw,60px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    @media (min-width: 640px) {
+      .legal-footer { flex-direction: row; justify-content: space-between; }
+    }
+    .legal-footer-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .legal-footer-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .legal-footer-links a:hover { color: rgba(255,255,255,0.6); }
+    .legal-footer-links a.active { color: rgba(255,255,255,0.5); }
+    .legal-footer-sep { color: rgba(255,255,255,0.15); font-size: 12px; }
+    .legal-copyright {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav class="legal-nav">
+  <a href="index.html" class="back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Retour à l'accueil
+  </a>
+  <img src="logo.png" alt="CoinCarrière" style="height:24px;filter:brightness(0) invert(1);display:block;object-fit:contain;">
+</nav>
+
+<!-- ── Page header ── -->
+<header class="legal-hero">
+  <div style="max-width:780px;margin:0 auto;">
+    <span class="eyebrow">Document légal · CGU</span>
+    <h1>Conditions Générales<br>d'Utilisation</h1>
+    <p class="date">Dernière mise à jour : 19 avril 2026</p>
+  </div>
+</header>
+
+<!-- ── Legal content ── -->
+<main class="legal-body">
+
+  <!-- Table of contents -->
+  <div class="toc">
+    <div class="toc-title">Sommaire</div>
+    <ol>
+      <li><a href="#art1"><span class="toc-num">01</span>Objet</a></li>
+      <li><a href="#art2"><span class="toc-num">02</span>Définitions</a></li>
+      <li><a href="#art3"><span class="toc-num">03</span>Inscription et compte</a></li>
+      <li><a href="#art4"><span class="toc-num">04</span>Services proposés</a></li>
+      <li><a href="#art5"><span class="toc-num">05</span>Obligations des Utilisateurs</a></li>
+      <li><a href="#art6"><span class="toc-num">06</span>Contenu publié</a></li>
+      <li><a href="#art7"><span class="toc-num">07</span>Propriété intellectuelle</a></li>
+      <li><a href="#art8"><span class="toc-num">08</span>Limitation de responsabilité</a></li>
+      <li><a href="#art9"><span class="toc-num">09</span>Suspension et résiliation</a></li>
+      <li><a href="#art10"><span class="toc-num">10</span>Données personnelles</a></li>
+      <li><a href="#art11"><span class="toc-num">11</span>Liens tiers</a></li>
+      <li><a href="#art12"><span class="toc-num">12</span>Modifications</a></li>
+      <li><a href="#art13"><span class="toc-num">13</span>Droit applicable</a></li>
+      <li><a href="#art14"><span class="toc-num">14–17</span>Dispositions finales</a></li>
+    </ol>
+  </div>
+
+  <!-- Article 1 -->
+  <div class="legal-section" id="art1">
+    <h2><span class="sec-num">Art. 1</span> Objet</h2>
+    <p>Les présentes Conditions Générales d'Utilisation (ci-après « CGU ») régissent l'accès et l'utilisation de la plateforme CoinCarrière, accessible à l'adresse <a href="https://coincarriere.com" target="_blank" rel="noopener">coincarriere.com</a>, exploitée par 9558-9321 Québec inc. (NEQ : 1181724304), dont le siège social est situé à Québec, QC, Canada.</p>
+    <p>En accédant à la Plateforme ou en utilisant ses services, vous acceptez d'être lié par les présentes CGU. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser la Plateforme.</p>
+  </div>
+
+  <!-- Article 2 -->
+  <div class="legal-section" id="art2">
+    <h2><span class="sec-num">Art. 2</span> Définitions</h2>
+    <ul>
+      <li><strong>Plateforme :</strong> le site web coincarriere.com et l'ensemble des services associés</li>
+      <li><strong>Utilisateur :</strong> toute personne accédant à la Plateforme, qu'elle soit inscrite ou non</li>
+      <li><strong>Candidat :</strong> tout Utilisateur inscrit utilisant la Plateforme pour rechercher un emploi, déposer un CV ou postuler à des offres</li>
+      <li><strong>Employeur :</strong> toute personne morale ou physique utilisant la Plateforme pour publier des offres d'emploi et gérer des processus de recrutement</li>
+      <li><strong>Recruteur :</strong> tout utilisateur agissant pour le compte d'un Employeur sur la Plateforme</li>
+      <li><strong>Contenu :</strong> tout texte, image, fichier, CV, offre d'emploi ou autre information publié sur la Plateforme</li>
+      <li><strong>Services :</strong> l'ensemble des fonctionnalités offertes par la Plateforme (publication d'offres, dépôt de CV, gestion de candidatures, planification d'entretiens, etc.)</li>
+    </ul>
+  </div>
+
+  <!-- Article 3 -->
+  <div class="legal-section" id="art3">
+    <h2><span class="sec-num">Art. 3</span> Inscription et compte utilisateur</h2>
+    <h3>3.1 Création de compte</h3>
+    <p>L'accès à certains Services nécessite la création d'un compte. Lors de l'inscription, vous vous engagez à :</p>
+    <ul>
+      <li>Fournir des informations exactes, complètes et à jour</li>
+      <li>Maintenir la confidentialité de vos identifiants de connexion</li>
+      <li>Nous informer immédiatement de toute utilisation non autorisée de votre compte</li>
+      <li>Ne pas créer plusieurs comptes pour la même personne</li>
+    </ul>
+    <h3>3.2 Âge minimum</h3>
+    <p>Vous devez être âgé d'au moins 16 ans pour utiliser la Plateforme. En créant un compte, vous confirmez remplir cette condition.</p>
+    <h3>3.3 Responsabilité du compte</h3>
+    <p>Vous êtes seul responsable de toutes les activités effectuées sous votre compte. CoinCarrière ne saurait être tenu responsable des dommages résultant de l'utilisation non autorisée de votre compte.</p>
+  </div>
+
+  <!-- Article 4 -->
+  <div class="legal-section" id="art4">
+    <h2><span class="sec-num">Art. 4</span> Services proposés</h2>
+    <h3>4.1 Pour les Candidats</h3>
+    <ul>
+      <li>Consultation des offres d'emploi publiées</li>
+      <li>Dépôt de CV et création de profil professionnel</li>
+      <li>Candidature en ligne aux offres d'emploi</li>
+      <li>Suivi de l'avancement des candidatures</li>
+      <li>Consultation des entretiens planifiés</li>
+      <li>Réception de notifications relatives aux candidatures</li>
+    </ul>
+    <h3>4.2 Pour les Employeurs et Recruteurs</h3>
+    <ul>
+      <li>Publication et gestion d'offres d'emploi</li>
+      <li>Réception et gestion des candidatures</li>
+      <li>Consultation des CV et profils de Candidats</li>
+      <li>Planification et gestion d'entretiens</li>
+      <li>Évaluation des Candidats et gestion du pipeline de recrutement</li>
+      <li>Gestion des offres d'embauche</li>
+      <li>Outils d'analyse et de reporting</li>
+    </ul>
+    <h3>4.3 Disponibilité</h3>
+    <p>CoinCarrière s'efforce d'assurer la disponibilité de la Plateforme 24h/24, 7j/7. Toutefois, nous ne garantissons pas un accès ininterrompu et nous nous réservons le droit de suspendre temporairement l'accès pour des raisons de maintenance, de mise à jour ou en cas de force majeure.</p>
+  </div>
+
+  <!-- Article 5 -->
+  <div class="legal-section" id="art5">
+    <h2><span class="sec-num">Art. 5</span> Obligations des Utilisateurs</h2>
+    <h3>5.1 Obligations générales</h3>
+    <p>En utilisant la Plateforme, vous vous engagez à :</p>
+    <ul>
+      <li>Respecter les lois et règlements en vigueur</li>
+      <li>Ne pas publier de contenu illicite, diffamatoire, discriminatoire, haineux ou portant atteinte aux droits de tiers</li>
+      <li>Ne pas usurper l'identité d'une autre personne ou entité</li>
+      <li>Ne pas utiliser la Plateforme à des fins frauduleuses ou malveillantes</li>
+      <li>Ne pas tenter d'accéder de manière non autorisée aux systèmes ou données de la Plateforme</li>
+      <li>Ne pas utiliser de robots, scrapers ou tout autre moyen automatisé pour collecter des données de la Plateforme</li>
+      <li>Ne pas perturber le fonctionnement de la Plateforme</li>
+    </ul>
+    <h3>5.2 Obligations spécifiques aux Candidats</h3>
+    <ul>
+      <li>Fournir des informations véridiques dans leur CV et profil</li>
+      <li>Ne pas postuler à des offres de manière abusive ou non pertinente</li>
+      <li>Respecter la confidentialité des informations relatives aux processus de recrutement</li>
+    </ul>
+    <h3>5.3 Obligations spécifiques aux Employeurs</h3>
+    <ul>
+      <li>Publier des offres d'emploi réelles, licites et non discriminatoires</li>
+      <li>Respecter la législation du travail applicable</li>
+      <li>Traiter les données des Candidats conformément aux lois sur la protection des renseignements personnels</li>
+      <li>Ne pas utiliser les CV et informations des Candidats à des fins autres que le recrutement</li>
+      <li>Ne pas publier d'offres trompeuses, de marketing déguisé ou de schèmes pyramidaux</li>
+    </ul>
+  </div>
+
+  <!-- Article 6 -->
+  <div class="legal-section" id="art6">
+    <h2><span class="sec-num">Art. 6</span> Contenu publié par les Utilisateurs</h2>
+    <h3>6.1 Propriété du contenu</h3>
+    <p>Vous conservez la propriété intellectuelle du Contenu que vous publiez sur la Plateforme (CV, descriptions de poste, etc.). En publiant du Contenu, vous accordez à CoinCarrière une licence non exclusive, mondiale et gratuite pour utiliser, afficher, reproduire et distribuer ce Contenu dans le cadre du fonctionnement des Services.</p>
+    <h3>6.2 Responsabilité du contenu</h3>
+    <p>Vous êtes seul responsable du Contenu que vous publiez. CoinCarrière n'effectue pas de vérification systématique du Contenu publié par les Utilisateurs et ne saurait être tenu responsable de son exactitude ou de sa légalité.</p>
+    <h3>6.3 Modération</h3>
+    <p>CoinCarrière se réserve le droit de supprimer tout Contenu qui contreviendrait aux présentes CGU, aux lois applicables ou qui serait signalé comme inapproprié, et ce, sans préavis ni indemnisation.</p>
+  </div>
+
+  <!-- Article 7 -->
+  <div class="legal-section" id="art7">
+    <h2><span class="sec-num">Art. 7</span> Propriété intellectuelle</h2>
+    <p>L'ensemble des éléments de la Plateforme (design, logos, textes, code source, bases de données, fonctionnalités) est la propriété exclusive de 9558-9321 Québec inc. ou de ses concédants de licence et est protégé par les lois sur la propriété intellectuelle.</p>
+    <p>Toute reproduction, représentation, modification ou exploitation non autorisée de tout ou partie de ces éléments est strictement interdite.</p>
+    <p>Le nom « CoinCarrière », le logo et les marques associées sont des marques de 9558-9321 Québec inc. Leur utilisation sans autorisation écrite préalable est interdite.</p>
+  </div>
+
+  <!-- Article 8 -->
+  <div class="legal-section" id="art8">
+    <h2><span class="sec-num">Art. 8</span> Limitation de responsabilité</h2>
+    <h3>8.1 Rôle d'intermédiaire</h3>
+    <p>CoinCarrière agit en tant qu'intermédiaire technique entre les Candidats et les Employeurs. À ce titre :</p>
+    <ul>
+      <li>Nous ne sommes pas partie aux relations de travail entre Candidats et Employeurs</li>
+      <li>Nous ne garantissons pas l'obtention d'un emploi pour les Candidats</li>
+      <li>Nous ne garantissons pas la qualité des Candidats pour les Employeurs</li>
+      <li>Nous ne sommes pas responsables des décisions d'embauche ou de refus</li>
+    </ul>
+    <h3>8.2 Exclusion de garanties</h3>
+    <p>La Plateforme est fournie « telle quelle » et « selon disponibilité ». Dans les limites permises par la loi, CoinCarrière exclut toute garantie, expresse ou implicite, incluant les garanties de qualité marchande, d'adéquation à un usage particulier et d'absence de contrefaçon.</p>
+    <h3>8.3 Plafond de responsabilité</h3>
+    <p>Dans les limites permises par la loi applicable, la responsabilité totale de CoinCarrière pour tout dommage lié à l'utilisation de la Plateforme est limitée au montant des frais que vous nous avez versés au cours des douze (12) mois précédant le dommage, ou à cent dollars canadiens (100 $ CAD) si aucun frais n'a été versé.</p>
+  </div>
+
+  <!-- Article 9 -->
+  <div class="legal-section" id="art9">
+    <h2><span class="sec-num">Art. 9</span> Suspension et résiliation</h2>
+    <h3>9.1 Par l'Utilisateur</h3>
+    <p>Vous pouvez à tout moment cesser d'utiliser la Plateforme et demander la suppression de votre compte en nous contactant à <a href="mailto:contact@coincarriere.com">contact@coincarriere.com</a>.</p>
+    <h3>9.2 Par CoinCarrière</h3>
+    <p>Nous nous réservons le droit de suspendre ou de résilier votre accès à la Plateforme, sans préavis, en cas de :</p>
+    <ul>
+      <li>Violation des présentes CGU</li>
+      <li>Comportement frauduleux ou abusif</li>
+      <li>Publication de contenu illicite ou inapproprié</li>
+      <li>Utilisation non autorisée de la Plateforme (scraping, spamming, etc.)</li>
+      <li>Atteinte à la sécurité ou au fonctionnement de la Plateforme</li>
+    </ul>
+  </div>
+
+  <!-- Article 10 -->
+  <div class="legal-section" id="art10">
+    <h2><span class="sec-num">Art. 10</span> Protection des renseignements personnels</h2>
+    <p>La collecte et le traitement de vos renseignements personnels sont régis par notre <a href="politique-confidentialite.html">Politique de confidentialité</a>, qui fait partie intégrante des présentes CGU. En utilisant la Plateforme, vous reconnaissez avoir pris connaissance de cette politique.</p>
+  </div>
+
+  <!-- Article 11 -->
+  <div class="legal-section" id="art11">
+    <h2><span class="sec-num">Art. 11</span> Liens vers des sites tiers</h2>
+    <p>La Plateforme peut contenir des liens vers des sites web de tiers. Ces liens sont fournis à titre informatif uniquement. CoinCarrière n'exerce aucun contrôle sur ces sites et n'est pas responsable de leur contenu, de leurs pratiques de confidentialité ou de leur disponibilité.</p>
+  </div>
+
+  <!-- Article 12 -->
+  <div class="legal-section" id="art12">
+    <h2><span class="sec-num">Art. 12</span> Modifications des CGU</h2>
+    <p>CoinCarrière se réserve le droit de modifier les présentes CGU à tout moment. En cas de modification substantielle, nous vous en informerons par un avis sur la Plateforme ou par courriel. La poursuite de l'utilisation de la Plateforme après notification vaut acceptation des CGU modifiées.</p>
+  </div>
+
+  <!-- Article 13 -->
+  <div class="legal-section" id="art13">
+    <h2><span class="sec-num">Art. 13</span> Droit applicable et juridiction</h2>
+    <p>Les présentes CGU sont régies par les lois de la province de Québec et les lois fédérales du Canada applicables. Tout différend relatif à l'interprétation ou à l'exécution des présentes CGU sera soumis à la compétence exclusive des tribunaux du district judiciaire de Québec, Québec, Canada.</p>
+  </div>
+
+  <!-- Articles 14–17 -->
+  <div class="legal-section" id="art14">
+    <h2><span class="sec-num">Art. 14–17</span> Dispositions finales</h2>
+    <h3>14. Divisibilité</h3>
+    <p>Si une disposition des présentes CGU est jugée invalide ou inapplicable par un tribunal compétent, les autres dispositions demeurent pleinement en vigueur.</p>
+    <h3>15. Renonciation</h3>
+    <p>Le fait pour CoinCarrière de ne pas exercer un droit prévu aux présentes CGU ne constitue pas une renonciation à ce droit.</p>
+    <h3>16. Intégralité de l'accord</h3>
+    <p>Les présentes CGU, conjointement avec la Politique de confidentialité, constituent l'intégralité de l'accord entre vous et CoinCarrière concernant l'utilisation de la Plateforme.</p>
+    <h3>17. Contact</h3>
+    <p>Pour toute question relative aux présentes CGU :</p>
+    <div class="contact-card">
+      <p><strong>Courriel :</strong> <a href="mailto:contact@coincarriere.com">contact@coincarriere.com</a></p>
+      <p><strong>Entreprise :</strong> 9558-9321 Québec inc. (CoinCarrière)</p>
+      <p><strong>Siège social :</strong> Québec, QC, Canada</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── Footer ── -->
+<footer class="legal-footer">
+  <img src="logo.png" alt="CoinCarrière" style="height:24px;filter:brightness(0) invert(1);display:block;object-fit:contain;">
+  <div class="legal-footer-links">
+    <a href="politique-confidentialite.html">Politique de Confidentialité</a>
+    <span class="legal-footer-sep">·</span>
+    <a href="cgu.html" class="active">CGU</a>
+    <span class="legal-footer-sep">·</span>
+    <a href="mailto:contact@coincarriere.com">Contact</a>
+  </div>
+  <span class="legal-copyright">© 2026 CoinCarrière</span>
+</footer>
+
+</body>
+</html>

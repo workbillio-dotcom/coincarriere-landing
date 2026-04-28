@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoinCarrière BTP — Recrutez vos talents qualifiés dès 48h</title>
+  <meta name="description" content="Centralisez votre recrutement BTP sur une seule plateforme. Recevez des candidatures présélectionnées dès 48h. Gratuit pour commencer.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#050F1A">
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','930343703335985');
+    fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=930343703335985&ev=PageView&noscript=1"/></noscript>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand:       '#0077B6',
+            'brand-dark':'#005a8a',
+            'brand-ink': '#052238',
+            lime:        '#b4dc02',
+            'lime-dark': '#9bbf00',
+            paper:       '#FAFAF7',
+            ink:         '#0A0F1A',
+          },
+          fontFamily: {
+            display: ['Sora','sans-serif'],
+            body:    ['Inter','sans-serif'],
+            mono:    ['JetBrains Mono','monospace'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Design system -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     01 / HERO — FULL-BG VIDEO · LEFT TEXT
+═══════════════════════════════════════════════ -->
+<section id="hero-section" style="position:relative;min-height:100vh;overflow:hidden;background:#050F1A;">
+
+  <!-- ① VIDEO — desktop (hidden on mobile) -->
+  <video class="hero-video-desktop" style="position:absolute;top:0;left:unset;bottom:0;right:-100px;width:calc(100% + 100px);height:100%;object-fit:cover;object-position:right center;pointer-events:none;z-index:0;" autoplay muted loop playsinline>
+    <source src="hero-bg.mp4" type="video/mp4">
+  </video>
+
+  <!-- ① VIDEO — mobile (hidden on desktop) -->
+  <video class="hero-video-mobile" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:cover;object-position:center center;pointer-events:none;z-index:0;" autoplay muted loop playsinline>
+    <source src="hero-bg-mobile.mp4" type="video/mp4">
+  </video>
+
+  <!-- ② CINEMATIC GRADIENT — dark-left → transparent-right (6 stops) -->
+  <div style="position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(to right,
+      rgba(5,15,26,0.97)  0%,
+      rgba(5,15,26,0.94) 18%,
+      rgba(5,15,26,0.86) 32%,
+      rgba(5,15,26,0.62) 48%,
+      rgba(5,15,26,0.24) 64%,
+      rgba(5,15,26,0.06) 78%,
+      transparent        90%);" aria-hidden="true"></div>
+
+  <!-- ③ TOP VIGNETTE — nav readability -->
+  <div style="position:absolute;top:0;left:0;right:0;height:180px;z-index:1;pointer-events:none;
+    background:linear-gradient(to bottom,rgba(5,15,26,0.55) 0%,transparent 100%);" aria-hidden="true"></div>
+
+  <!-- ④ BOTTOM VIGNETTE — ground the composition -->
+  <div style="position:absolute;bottom:0;left:0;right:0;height:130px;z-index:1;pointer-events:none;
+    background:linear-gradient(to top,rgba(5,15,26,0.45) 0%,transparent 100%);" aria-hidden="true"></div>
+
+  <!-- ④b RIGHT VIGNETTE — seal the dark edge on the right -->
+  <div style="position:absolute;top:0;right:0;bottom:0;width:30%;z-index:1;pointer-events:none;
+    background:linear-gradient(to left,rgba(5,15,26,0.55) 0%,rgba(5,15,26,0.10) 60%,transparent 100%);" aria-hidden="true"></div>
+
+  <!-- ④c MOBILE SCRIM — bottom-up dark fade, replaces left gradient on mobile -->
+  <div class="hero-mobile-scrim" aria-hidden="true"></div>
+
+  <!-- ⑤ INTERACTIVE BLUEPRINT CANVAS — replaces static grid -->
+  <canvas id="blueprint-canvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;display:block;" aria-hidden="true"></canvas>
+
+  <!-- ⑥ FILM GRAIN — cinematic texture -->
+  <div style="position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0.028;mix-blend-mode:overlay;
+    background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%221%22 numOctaves=%224%22 stitchTiles=%22stitch%22/></filter><rect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22/></svg>');
+    background-size:180px 180px;" aria-hidden="true"></div>
+
+  <!-- ⑦ LIME STRUCTURAL RAIL — left edge brand mark -->
+  <div style="position:absolute;left:0;top:0;bottom:0;width:4px;z-index:20;pointer-events:none;
+    background:linear-gradient(to bottom,transparent 0%,#b4dc02 10%,#b4dc02 90%,transparent 100%);" aria-hidden="true"></div>
+
+  <!-- ⑧ CONTENT LAYER -->
+  <div style="position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column;">
+
+    <!-- NAV -->
+    <nav style="flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,4vw,60px);height:70px;">
+      <div style="background:rgba(255,255,255,0.93);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:12px;padding:8px 18px;border:1px solid rgba(255,255,255,0.5);">
+        <img src="logo.png" alt="CoinCarrière" style="height:42px;display:block;object-fit:contain;">
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="pulse-dot"></span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;color:rgba(255,255,255,0.4);text-transform:uppercase;">Maroc · BTP · 2026</span>
+      </div>
+    </nav>
+
+    <!-- HERO BODY — vertically centred, left-aligned -->
+    <div class="hero-body" style="flex:1;display:flex;align-items:center;padding:10px clamp(24px,4vw,60px) 0;">
+      <div style="width:100%;max-width:540px;">
+
+        <!-- TOP GROUP: title only (floats to top on mobile) -->
+        <div class="hero-title-group">
+
+          <!-- Eyebrow -->
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;" class="hero-fade d1">
+            <div style="width:34px;height:2.5px;background:#b4dc02;border-radius:2px;flex-shrink:0;"></div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.22em;color:#b4dc02;text-transform:uppercase;">Recrutement BTP · Plateforme</span>
+          </div>
+
+          <!-- H1 -->
+          <h1 class="display hero-fade d2" style="font-weight:800;letter-spacing:-0.04em;margin-bottom:10px;">
+            <span style="display:block;color:#F2F7FC;font-size:clamp(32px,4.8vw,64px);line-height:1.04;">Recrutez des profils BTP</span>
+            <span style="display:block;color:#b4dc02;font-size:clamp(32px,4.8vw,64px);line-height:1.04;">3x plus vite.</span>
+          </h1>
+
+          <!-- Lime rule -->
+          <div style="width:52px;height:2px;background:rgba(180,220,2,0.32);border-radius:2px;margin-bottom:10px;" class="hero-fade d2"></div>
+
+        </div><!-- /hero-title-group -->
+
+        <!-- BOTTOM GROUP: sub-copy + CTA (anchored to bottom on mobile) -->
+        <div class="hero-bottom-group">
+
+          <!-- Subheadline -->
+          <p class="hero-fade d3" style="font-family:'Inter',sans-serif;font-size:clamp(13px,1.2vw,15px);line-height:1.6;color:rgba(242,247,252,0.56);margin-bottom:20px;max-width:430px;">
+            CoinCarrière centralise tout votre recrutement BTP sur une seule plateforme, pour que vous consacriez votre temps aux bons candidats.
+          </p>
+
+          <!-- CTA -->
+          <div class="hero-fade d4" style="margin-bottom:16px;">
+            <a href="https://coincarriere.com/register?type=company" target="_blank" rel="noopener"
+               onclick="fbq('track','Lead')"
+               class="btn-primary inline-flex items-center gap-3"
+               style="padding:13px 28px;border-radius:13px;font-size:15px;font-weight:700;letter-spacing:-0.015em;display:inline-flex;box-shadow:0 0 48px rgba(180,220,2,0.22),0 8px 32px rgba(0,0,0,0.35);">
+              <span>Publier mon offre</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+
+          <!-- Social proof pill -->
+          <div class="hero-fade d5 hero-mobile-optional" style="display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:10px;background:rgba(242,247,252,0.04);border:1px solid rgba(255,255,255,0.08);margin-bottom:12px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#b4dc02" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(242,247,252,0.4);white-space:nowrap;">Utilisé par des recruteurs professionnels</span>
+          </div>
+
+          <!-- Reassurance -->
+          <div class="hero-fade d6 hero-mobile-optional" style="display:flex;flex-wrap:wrap;gap:8px 16px;">
+            <span class="reassurance-item">Gratuit pour commencer</span>
+            <span class="reassurance-item">Aucune carte bancaire</span>
+            <span class="reassurance-item">En ligne en 5 min</span>
+          </div>
+
+        </div><!-- /hero-bottom-group -->
+
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     LOGO MARQUEE — ILS RECRUTENT SUR COINCARRIÈRE
+═══════════════════════════════════════════════ -->
+<section class="bg-white border-b border-ink/8 py-10 overflow-hidden">
+  <div class="eyebrow text-brand-ink/40 text-center mb-7">ILS RECRUTENT SUR COINCARRIÈRE</div>
+  <div style="overflow:hidden;mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%);">
+    <div style="display:flex;">
+      <div class="marquee">
+        <img src="logos/batifer.jpg"              alt="Batifer"               style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/sogea-maroc.png"          alt="Sogea Maroc"           style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/saint-gobain.png"         alt="Saint-Gobain"          style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/plastima.webp"            alt="Plastima Canalisations" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/tectra.png"               alt="Tectra"                style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/cpsq-consulting.webp"     alt="CPSQ Consulting"       style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/profils-recrutement.png"  alt="Profils Recrutement"   style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <!-- Duplicate for seamless loop -->
+        <img src="logos/batifer.jpg"              alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/sogea-maroc.png"          alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/saint-gobain.png"         alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/plastima.webp"            alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/tectra.png"               alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/cpsq-consulting.webp"     alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/profils-recrutement.png"  alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     02 / TRUST — SOCIAL PROOF
+═══════════════════════════════════════════════ -->
+<section class="relative bg-white border-y border-ink/10 py-20 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+    <!-- Section header -->
+    <div class="flex items-center gap-3 mb-10 fade-up">
+      <span class="section-number">Quelques chiffres</span>
+      <div class="h-px flex-1 bg-ink/10"></div>
+    </div>
+
+    <!-- Stats grid -->
+    <div class="trust-stats-grid grid grid-cols-1 md:grid-cols-3 gap-px bg-ink/10 mb-14 border border-ink/10 rounded-2xl overflow-hidden">
+
+      <div class="fade-up d1 bg-white p-6 sm:p-8 md:p-10">
+        <div class="eyebrow text-brand-ink/50 mb-3">Entreprises actives</div>
+        <div class="display text-brand text-6xl lg:text-7xl mb-3">
+          <span class="count-up" data-target="457" data-prefix="+">+457</span>
+        </div>
+        <div class="text-sm text-brand-ink/60 leading-snug">entreprises recrutent sur CoinCarrière</div>
+      </div>
+
+      <div class="fade-up d2 bg-white p-6 sm:p-8 md:p-10">
+        <div class="eyebrow text-brand-ink/50 mb-3">Offres pourvues</div>
+        <div class="display text-brand text-6xl lg:text-7xl mb-3">
+          <span class="count-up" data-target="4942" data-prefix="+">+4 942</span>
+        </div>
+        <div class="text-sm text-brand-ink/60 leading-snug">publiées et pourvues depuis le lancement</div>
+      </div>
+
+      <div class="fade-up d3 bg-white p-6 sm:p-8 md:p-10 relative overflow-hidden">
+        <div class="eyebrow text-brand-ink/50 mb-3">Délai moyen</div>
+        <div class="display text-6xl lg:text-7xl mb-3" style="color:#b4dc02;">48h</div>
+        <div class="text-sm text-brand-ink/60 leading-snug">pour vos premières candidatures qualifiées</div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     03 / AVANT · APRÈS
+═══════════════════════════════════════════════ -->
+<section class="relative bg-paper py-24 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+    <div class="flex items-center gap-3 mb-8 sm:mb-14 fade-up">
+      <span class="section-number">AVANT · APRÈS</span>
+      <div class="h-px flex-1 bg-ink/10"></div>
+    </div>
+
+    <div class="grid lg:grid-cols-12 gap-12 items-center">
+
+      <!-- Left copy -->
+      <div class="lg:col-span-5 fade-up">
+        <h2 class="display text-3xl sm:text-4xl lg:text-[58px] mb-6 text-brand-ink" style="line-height:1.15;">
+          De la <em class="text-brand-ink/45">dispersion</em> chronique à la Clarté <span class="lime-stroke">Opérationnelle.</span>
+        </h2>
+        <p class="text-[17px] text-brand-ink/70 leading-relaxed mb-8" style="text-wrap:pretty;">
+          Amal, RH BTP à Tanger, passait tout son temps à jongler entre LinkedIn, Indeed, WhatsApp, Gmail et des feuilles Excel. Aujourd'hui, son recrutement tient dans un seul tableau de bord.
+        </p>
+        <div class="flex flex-col gap-3 text-sm">
+          <div class="flex items-center gap-3">
+            <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0" style="background:#EDFCC4;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3D5600" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span class="text-brand-ink">–50% de temps de présélection</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0" style="background:#EDFCC4;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3D5600" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span class="text-brand-ink">Une seule interface, plus aucun onglet ouvert</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0" style="background:#EDFCC4;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3D5600" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span class="text-brand-ink">100% des candidatures dans le profil recherché</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right visualization -->
+      <div class="lg:col-span-7 fade-up d1 grid grid-cols-1 sm:grid-cols-2 gap-4" style="position:relative;">
+
+        <!-- Directional arrow — desktop only -->
+        <div class="avant-apres-arrow hidden sm:block" aria-hidden="true">
+          <div class="avant-apres-arrow-inner">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <line x1="5" y1="12" x2="19" y2="12" stroke="#0077B6" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+              <polyline points="13 6 19 12 13 18" stroke="#0077B6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- BEFORE -->
+        <div class="relative bg-white rounded-2xl border border-ink/10 p-5 overflow-hidden sm:min-h-[340px]">
+          <div class="flex items-center justify-between mb-4">
+            <div class="eyebrow text-brand-ink/60">❌ AVANT CoinCarrière</div>
+            <div class="text-[10px] font-mono text-red-500 bg-red-50 px-2 py-0.5 rounded">CHAOS</div>
+          </div>
+          <div class="display text-3xl text-brand-ink/80 mb-4 leading-tight">5+ outils<br>aucun système</div>
+          <div class="relative h-[200px]">
+
+            <!-- Chaos mesh — tangled lines between tools -->
+            <svg class="chaos-mesh" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" aria-hidden="true">
+              <!-- LinkedIn(15,12) → Excel(42,37) -->
+              <path d="M15 12 Q35 18 42 37" stroke="rgba(100,110,130,0.20)" stroke-width="0.8" stroke-linecap="round"/>
+              <!-- Excel(42,37) → Indeed(80,32) -->
+              <path d="M42 37 Q62 20 80 32" stroke="rgba(100,110,130,0.16)" stroke-width="0.7" stroke-linecap="round"/>
+              <!-- LinkedIn(15,12) → WhatsApp(22,57) -->
+              <path d="M15 12 Q6 32 22 57" stroke="rgba(100,110,130,0.15)" stroke-width="0.7" stroke-linecap="round"/>
+              <!-- WhatsApp(22,57) → Gmail(75,82) -->
+              <path d="M22 57 Q55 60 75 82" stroke="rgba(100,110,130,0.19)" stroke-width="0.9" stroke-linecap="round"/>
+              <!-- Excel(42,37) → WhatsApp(22,57) -->
+              <path d="M42 37 Q28 50 22 57" stroke="rgba(100,110,130,0.13)" stroke-width="0.6" stroke-linecap="round"/>
+              <!-- Indeed(80,32) → Gmail(75,82) -->
+              <path d="M80 32 Q90 58 75 82" stroke="rgba(100,110,130,0.16)" stroke-width="0.7" stroke-linecap="round"/>
+              <!-- WhatsApp(22,57) → Post-it(30,97) -->
+              <path d="M22 57 Q16 78 30 97" stroke="rgba(100,110,130,0.14)" stroke-width="0.6" stroke-linecap="round"/>
+              <!-- Gmail(75,82) → Post-it(30,97) -->
+              <path d="M75 82 Q55 94 30 97" stroke="rgba(100,110,130,0.13)" stroke-width="0.6" stroke-linecap="round"/>
+              <!-- LinkedIn(15,12) crossing to Gmail(75,82) — diagonal chaos -->
+              <path d="M15 12 Q48 52 75 82" stroke="rgba(100,110,130,0.09)" stroke-width="0.5" stroke-linecap="round"/>
+              <!-- Indeed(80,32) → Post-it(30,97) — crossing chaos -->
+              <path d="M80 32 Q42 70 30 97" stroke="rgba(100,110,130,0.08)" stroke-width="0.5" stroke-linecap="round"/>
+            </svg>
+
+            <div class="chaos-pill chaos-float" style="top:10px;left:0;--r:-4deg;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#0A66C2"><rect x="2" y="2" width="20" height="20" rx="4"/><path fill="white" d="M6.5 10h2v7h-2v-7zm1-3a1.2 1.2 0 1 1 0 2.4A1.2 1.2 0 0 1 7.5 7zm4.5 3h2v1h.03c.28-.53.97-1.1 2-1.1C18 10 18 12 18 12v5h-2v-4.5c0-.85-.3-1.5-1-1.5-.84 0-1 .77-1 1.5V17h-2v-7z"/></svg>
+              LinkedIn
+            </div>
+            <div class="chaos-pill chaos-float" style="top:50px;right:0;--r:3deg;animation-delay:1s;">
+              <span style="color:#0077B6;">■</span> Indeed
+            </div>
+            <div class="chaos-pill chaos-float" style="top:100px;left:8px;--r:2deg;animation-delay:2s;">
+              <span style="color:#25D366;">●</span> WhatsApp
+            </div>
+            <div class="chaos-pill chaos-float" style="top:150px;right:10px;--r:-2deg;animation-delay:0.5s;">
+              <span style="color:#EA4335;">✉</span> Gmail
+            </div>
+            <div class="chaos-pill chaos-float" style="top:60px;left:30%;--r:5deg;animation-delay:1.5s;">
+              <span style="color:#107C41;">▨</span> Excel
+            </div>
+            <div class="chaos-pill chaos-float" style="top:190px;left:20%;--r:-3deg;animation-delay:2.5s;">
+              <span style="color:#666;">📎</span> Post-it
+            </div>
+          </div>
+        </div>
+
+        <!-- AFTER -->
+        <div class="relative rounded-2xl p-5 overflow-hidden sm:min-h-[340px]" style="background:#0077B6;">
+          <div class="absolute inset-0 blueprint-lines opacity-50 pointer-events-none"></div>
+          <div class="relative">
+            <div class="flex items-center justify-between mb-4">
+              <div class="eyebrow text-white/70">✓ APRÈS CoinCarrière</div>
+              <div class="text-[10px] font-mono bg-lime text-brand-ink px-2 py-0.5 rounded">ORDRE</div>
+            </div>
+            <div class="display text-3xl text-white mb-4 leading-tight">1 plateforme<br>tout centralisé</div>
+            <div class="bg-white rounded-xl p-3 shadow-2xl">
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-6 h-6 rounded-md flex items-center justify-center" style="background:#0077B6;">
+                  <span class="display text-white text-[11px]">C</span>
+                </div>
+                <div class="flex-1 text-[11px] text-brand-ink/70 font-mono">Tableau de bord</div>
+                <span class="pulse-dot"></span>
+              </div>
+              <div class="space-y-1.5">
+                <div class="flex items-center gap-2 p-1.5 rounded bg-paper">
+                  <div class="w-5 h-5 rounded-full" style="background:linear-gradient(135deg,#0077B6,#005a8a);"></div>
+                  <div class="flex-1 h-1.5 bg-ink/10 rounded"></div>
+                  <span class="tag tag-match">98%</span>
+                </div>
+                <div class="flex items-center gap-2 p-1.5 rounded bg-paper">
+                  <div class="w-5 h-5 rounded-full" style="background:linear-gradient(135deg,#b4dc02,#9bbf00);"></div>
+                  <div class="flex-1 h-1.5 bg-ink/10 rounded"></div>
+                  <span class="tag tag-match">94%</span>
+                </div>
+                <div class="flex items-center gap-2 p-1.5 rounded bg-paper">
+                  <div class="w-5 h-5 rounded-full" style="background:linear-gradient(135deg,#8A5500,#6a4300);"></div>
+                  <div class="flex-1 h-1.5 bg-ink/10 rounded"></div>
+                  <span class="tag tag-new">Nouveau</span>
+                </div>
+                <div class="flex items-center gap-2 p-1.5 rounded bg-paper">
+                  <div class="w-5 h-5 rounded-full" style="background:linear-gradient(135deg,#052238,#0A0F1A);"></div>
+                  <div class="flex-1 h-1.5 bg-ink/10 rounded"></div>
+                  <span class="tag tag-match">91%</span>
+                </div>
+              </div>
+              <div class="mt-3 pt-2 border-t border-ink/5 text-[10px] text-brand-ink/50 font-mono text-center">
+                → candidatures présélectionnées · suivi unifié
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     04 / PROCESS
+═══════════════════════════════════════════════ -->
+<section class="relative py-28 overflow-hidden" style="background:#052238;">
+  <!-- Blueprint grid -->
+  <div class="absolute inset-0 blueprint-lines opacity-100 pointer-events-none"></div>
+  <!-- Film grain -->
+  <div class="absolute inset-0 pointer-events-none" style="opacity:0.028;mix-blend-mode:overlay;
+    background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%221%22 numOctaves=%224%22 stitchTiles=%22stitch%22/></filter><rect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22/></svg>');
+    background-size:180px 180px;"></div>
+  <!-- Lime glow — bottom right -->
+  <div class="absolute bottom-0 right-0 w-96 h-96 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(180,220,2,0.08) 0%,transparent 70%);transform:translate(30%,30%);"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8">
+
+    <!-- Header — left-aligned editorial -->
+    <div class="mb-12 sm:mb-20 fade-up">
+      <div class="flex items-center gap-3 mb-8 sm:mb-10">
+        <span class="eyebrow text-white/35">Processus</span>
+        <div class="h-px flex-1 bg-white/10"></div>
+      </div>
+      <h2 class="display text-[40px] sm:text-5xl lg:text-[68px] text-white mb-5 leading-[0.94]">
+        4 Étapes simples et claires<br><span style="color:#b4dc02;">pour embaucher</span>
+      </h2>
+      <p class="text-white/50 text-[17px] max-w-md leading-relaxed">De la publication à l'embauche, sans jongler entre vos outils.</p>
+    </div>
+
+    <!-- ── DESKTOP layout ── -->
+    <div class="hidden lg:block relative">
+
+      <!-- Connector track -->
+      <div class="absolute z-0" style="top:34px;left:12%;right:12%;height:1px;background:rgba(255,255,255,0.08);"></div>
+      <div class="absolute z-0" style="top:34px;left:12%;width:56%;height:2px;background:linear-gradient(to right,#0077B6,rgba(0,119,182,0.5));border-radius:2px;"></div>
+      <div class="absolute z-0" style="top:34px;right:12%;width:19%;height:2px;background:#b4dc02;opacity:0.75;border-radius:2px;"></div>
+
+      <div class="grid grid-cols-4 gap-6">
+
+        <!-- Step 1 -->
+        <div class="fade-up d1 flex flex-col items-center text-center group">
+          <div class="relative z-10 w-[68px] h-[68px] rounded-full flex items-center justify-center mb-8 transition-all duration-300 group-hover:scale-110"
+               style="background:#0077B6;box-shadow:0 0 0 8px rgba(0,119,182,0.12),0 8px 28px rgba(0,119,182,0.45);">
+            <span class="display text-white" style="font-size:22px;letter-spacing:-0.04em;font-weight:700;">01</span>
+          </div>
+          <div class="w-full rounded-2xl p-6 transition-all duration-300 group-hover:-translate-y-2"
+               style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);backdrop-filter:blur(12px);">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:rgba(0,119,182,0.22);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7EC8E3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <h3 class="display text-white mb-3" style="font-size:18px;">Publiez votre offre</h3>
+            <p class="text-white/50 leading-relaxed mb-5" style="font-size:13px;">Décrivez le poste et les compétences recherchées. Votre offre BTP en ligne en quelques minutes.</p>
+            <span class="inline-flex items-center gap-1.5 font-mono px-3 py-1.5 rounded-full" style="font-size:10px;background:rgba(0,119,182,0.2);color:#7EC8E3;letter-spacing:0.08em;">⏱ 5 MINUTES</span>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="fade-up d2 flex flex-col items-center text-center group">
+          <div class="relative z-10 w-[68px] h-[68px] rounded-full flex items-center justify-center mb-8 transition-all duration-300 group-hover:scale-110"
+               style="background:#0077B6;box-shadow:0 0 0 8px rgba(0,119,182,0.12),0 8px 28px rgba(0,119,182,0.45);">
+            <span class="display text-white" style="font-size:22px;letter-spacing:-0.04em;font-weight:700;">02</span>
+          </div>
+          <div class="w-full rounded-2xl p-6 transition-all duration-300 group-hover:-translate-y-2"
+               style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);backdrop-filter:blur(12px);">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:rgba(0,119,182,0.22);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7EC8E3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3 class="display text-white mb-3" style="font-size:18px;">Recevez des profils</h3>
+            <p class="text-white/50 leading-relaxed mb-5" style="font-size:13px;">Les candidats postulent directement. Les profils sont regroupés dans un seul espace, lisible et centralisé.</p>
+            <span class="inline-flex items-center gap-1.5 font-mono px-3 py-1.5 rounded-full" style="font-size:10px;background:rgba(0,119,182,0.2);color:#7EC8E3;letter-spacing:0.08em;">⚡ DÈS 48H</span>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="fade-up d3 flex flex-col items-center text-center group">
+          <div class="relative z-10 w-[68px] h-[68px] rounded-full flex items-center justify-center mb-8 transition-all duration-300 group-hover:scale-110"
+               style="background:#0077B6;box-shadow:0 0 0 8px rgba(0,119,182,0.12),0 8px 28px rgba(0,119,182,0.45);">
+            <span class="display text-white" style="font-size:22px;letter-spacing:-0.04em;font-weight:700;">03</span>
+          </div>
+          <div class="w-full rounded-2xl p-6 transition-all duration-300 group-hover:-translate-y-2"
+               style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);backdrop-filter:blur(12px);">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:rgba(0,119,182,0.22);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7EC8E3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/>
+              </svg>
+            </div>
+            <h3 class="display text-white mb-3" style="font-size:18px;">Évaluez et planifiez</h3>
+            <p class="text-white/50 leading-relaxed mb-5" style="font-size:13px;">Comparez, notez, planifiez vos entretiens, tout au même endroit.</p>
+            <span class="inline-flex items-center gap-1.5 font-mono px-3 py-1.5 rounded-full" style="font-size:10px;background:rgba(0,119,182,0.2);color:#7EC8E3;letter-spacing:0.08em;">📋 CENTRALISÉ</span>
+          </div>
+        </div>
+
+        <!-- Step 4 — lime -->
+        <div class="fade-up d4 flex flex-col items-center text-center group">
+          <div class="relative z-10 w-[68px] h-[68px] rounded-full flex items-center justify-center mb-8 transition-all duration-300 group-hover:scale-110"
+               style="background:#b4dc02;box-shadow:0 0 0 8px rgba(180,220,2,0.15),0 8px 28px rgba(180,220,2,0.5);">
+            <span class="display text-brand-ink" style="font-size:22px;letter-spacing:-0.04em;font-weight:700;">04</span>
+          </div>
+          <div class="w-full rounded-2xl p-6 transition-all duration-300 group-hover:-translate-y-2"
+               style="background:rgba(180,220,2,0.07);border:1px solid rgba(180,220,2,0.22);backdrop-filter:blur(12px);">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:rgba(180,220,2,0.18);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b4dc02" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <h3 class="display text-white mb-3" style="font-size:18px;">Recrutez et relancez</h3>
+            <p class="text-white/50 leading-relaxed mb-5" style="font-size:13px;">Gardez les meilleurs profils en shortlist, envoyez l'offre au candidat retenu et avancez plus vite vers la décision finale.</p>
+            <span class="inline-flex items-center gap-1.5 font-mono px-3 py-1.5 rounded-full" style="font-size:10px;background:rgba(180,220,2,0.15);color:#b4dc02;letter-spacing:0.08em;">✓ BOUCLÉ</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── MOBILE layout — swipeable stepper (phones only) ── -->
+    <div class="process-stepper block md:hidden">
+
+      <!-- Scroll track -->
+      <div class="process-stepper-track" id="process-track">
+
+        <!-- Step 1 -->
+        <div class="process-step-card">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex-shrink-0 w-[48px] h-[48px] rounded-full flex items-center justify-center"
+                 style="background:#0077B6;box-shadow:0 0 0 5px rgba(0,119,182,0.14);">
+              <span class="display text-white" style="font-size:17px;font-weight:700;">01</span>
+            </div>
+            <span class="inline-flex items-center font-mono px-2.5 py-1 rounded-full" style="font-size:9px;background:rgba(0,119,182,0.2);color:#7EC8E3;letter-spacing:0.08em;">⏱ 5 MINUTES</span>
+          </div>
+          <h3 class="display text-white mb-2" style="font-size:20px;">Publiez votre offre</h3>
+          <p class="text-white/55 leading-relaxed" style="font-size:14px;">Décrivez le poste et les compétences recherchées. Votre offre BTP en ligne en quelques minutes.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="process-step-card">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex-shrink-0 w-[48px] h-[48px] rounded-full flex items-center justify-center"
+                 style="background:#0077B6;box-shadow:0 0 0 5px rgba(0,119,182,0.14);">
+              <span class="display text-white" style="font-size:17px;font-weight:700;">02</span>
+            </div>
+            <span class="inline-flex items-center font-mono px-2.5 py-1 rounded-full" style="font-size:9px;background:rgba(0,119,182,0.2);color:#7EC8E3;letter-spacing:0.08em;">⚡ DÈS 48H</span>
+          </div>
+          <h3 class="display text-white mb-2" style="font-size:20px;">Recevez des profils</h3>
+          <p class="text-white/55 leading-relaxed" style="font-size:14px;">Les candidats postulent directement. Les profils sont regroupés dans un seul espace, lisible et centralisé.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="process-step-card">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex-shrink-0 w-[48px] h-[48px] rounded-full flex items-center justify-center"
+                 style="background:#0077B6;box-shadow:0 0 0 5px rgba(0,119,182,0.14);">
+              <span class="display text-white" style="font-size:17px;font-weight:700;">03</span>
+            </div>
+            <span class="inline-flex items-center font-mono px-2.5 py-1 rounded-full" style="font-size:9px;background:rgba(0,119,182,0.2);color:#7EC8E3;letter-spacing:0.08em;">📋 CENTRALISÉ</span>
+          </div>
+          <h3 class="display text-white mb-2" style="font-size:20px;">Évaluez et planifiez</h3>
+          <p class="text-white/55 leading-relaxed" style="font-size:14px;">Comparez, notez, planifiez vos entretiens, tout au même endroit.</p>
+        </div>
+
+        <!-- Step 4 — lime accent -->
+        <div class="process-step-card process-step-card--lime">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex-shrink-0 w-[48px] h-[48px] rounded-full flex items-center justify-center"
+                 style="background:#b4dc02;box-shadow:0 0 0 5px rgba(180,220,2,0.18);">
+              <span class="display text-brand-ink" style="font-size:17px;font-weight:700;">04</span>
+            </div>
+            <span class="inline-flex items-center font-mono px-2.5 py-1 rounded-full" style="font-size:9px;background:rgba(180,220,2,0.15);color:#b4dc02;letter-spacing:0.08em;">✓ BOUCLÉ</span>
+          </div>
+          <h3 class="display text-white mb-2" style="font-size:20px;">Recrutez et relancez</h3>
+          <p class="text-white/55 leading-relaxed" style="font-size:14px;">Gardez les meilleurs profils en shortlist, envoyez l'offre au candidat retenu et avancez plus vite vers la décision finale.</p>
+        </div>
+
+      </div><!-- /process-stepper-track -->
+
+      <!-- Dot indicators -->
+      <div class="process-dots" id="process-dots" aria-hidden="true">
+        <span class="process-dot active"></span>
+        <span class="process-dot"></span>
+        <span class="process-dot"></span>
+        <span class="process-dot"></span>
+      </div>
+
+    </div><!-- /process-stepper -->
+
+    <!-- ── TABLET layout — vertical timeline (768px–1023px) ── -->
+    <div class="process-mobile-old hidden md:block lg:hidden relative">
+      <!-- Vertical track -->
+      <div class="absolute z-0" style="left:27px;top:4px;bottom:4px;width:2px;background:linear-gradient(to bottom,#0077B6 0%,#0077B6 72%,#b4dc02 100%);opacity:0.45;border-radius:2px;"></div>
+
+      <div class="space-y-7">
+
+        <!-- Mobile Step 1 -->
+        <div class="fade-up flex gap-5 items-start">
+          <div class="relative z-10 flex-shrink-0 w-[56px] h-[56px] rounded-full flex items-center justify-center"
+               style="background:#0077B6;box-shadow:0 0 0 6px rgba(0,119,182,0.12);">
+            <span class="display text-white" style="font-size:18px;font-weight:700;">01</span>
+          </div>
+          <div class="flex-1 rounded-2xl p-5" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);">
+            <h3 class="display text-white mb-2" style="font-size:17px;">Publiez votre offre</h3>
+            <p class="text-white/50 mb-3" style="font-size:13px;line-height:1.6;">Décrivez le poste et les compétences recherchées. Votre offre BTP en ligne en quelques minutes.</p>
+            <span class="inline-flex items-center font-mono px-2.5 py-1 rounded-full" style="font-size:9px;background:rgba(0,119,182,0.2);color:#7EC8E3;letter-spacing:0.08em;">⏱ 5 MINUTES</span>
+          </div>
+        </div>
+
+        <!-- Mobile Step 2 -->
+        <div class="fade-up d1 flex gap-5 items-start">
+          <div class="relative z-10 flex-shrink-0 w-[56px] h-[56px] rounded-full flex items-center justify-center"
+               style="background:#0077B6;box-shadow:0 0 0 6px rgba(0,119,182,0.12);">
+            <span class="display text-white" style="font-size:18px;font-weight:700;">02</span>
+          </div>
+          <div class="flex-1 rounded-2xl p-5" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);">
+            <h3 class="display text-white mb-2" style="font-size:17px;">Recevez des profils</h3>
+            <p class="text-white/50 mb-3" style="font-size:13px;line-height:1.6;">Les candidats postulent directement. Les profils sont regroupés dans un seul espace, lisible et centralisé.</p>
+            <span class="inline-flex items-center font-mono px-2.5 py-1 rounded-full" style="font-size:9px;background:rgba(0,119,182,0.2);color:#7EC8E3;letter-spacing:0.08em;">⚡ DÈS 48H</span>
+          </div>
+        </div>
+
+        <!-- Mobile Step 3 -->
+        <div class="fade-up d2 flex gap-5 items-start">
+          <div class="relative z-10 flex-shrink-0 w-[56px] h-[56px] rounded-full flex items-center justify-center"
+               style="background:#0077B6;box-shadow:0 0 0 6px rgba(0,119,182,0.12);">
+            <span class="display text-white" style="font-size:18px;font-weight:700;">03</span>
+          </div>
+          <div class="flex-1 rounded-2xl p-5" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);">
+            <h3 class="display text-white mb-2" style="font-size:17px;">Évaluez et planifiez</h3>
+            <p class="text-white/50 mb-3" style="font-size:13px;line-height:1.6;">Comparez, notez, planifiez vos entretiens, tout centralisé.</p>
+            <span class="inline-flex items-center font-mono px-2.5 py-1 rounded-full" style="font-size:9px;background:rgba(0,119,182,0.2);color:#7EC8E3;letter-spacing:0.08em;">📋 CENTRALISÉ</span>
+          </div>
+        </div>
+
+        <!-- Mobile Step 4 -->
+        <div class="fade-up d3 flex gap-5 items-start">
+          <div class="relative z-10 flex-shrink-0 w-[56px] h-[56px] rounded-full flex items-center justify-center"
+               style="background:#b4dc02;box-shadow:0 0 0 6px rgba(180,220,2,0.15);">
+            <span class="display text-brand-ink" style="font-size:18px;font-weight:700;">04</span>
+          </div>
+          <div class="flex-1 rounded-2xl p-5" style="background:rgba(180,220,2,0.07);border:1px solid rgba(180,220,2,0.22);">
+            <h3 class="display text-white mb-2" style="font-size:17px;">Recrutez et relancez</h3>
+            <p class="text-white/50 mb-3" style="font-size:13px;line-height:1.6;">Gardez les meilleurs profils en shortlist, envoyez l'offre au candidat retenu et avancez plus vite vers la décision finale.</p>
+            <span class="inline-flex items-center font-mono px-2.5 py-1 rounded-full" style="font-size:9px;background:rgba(180,220,2,0.15);color:#b4dc02;letter-spacing:0.08em;">✓ BOUCLÉ</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     05 / FEATURES — BENTO
+═══════════════════════════════════════════════ -->
+<section id="features-section" class="relative bg-paper py-24 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+    <div class="flex items-center gap-3 mb-12 fade-up">
+      <span class="section-number">FONCTIONNALITÉS</span>
+      <div class="h-px flex-1 bg-ink/10"></div>
+    </div>
+
+    <div class="max-w-3xl mb-14 fade-up d1">
+      <h2 class="display text-3xl sm:text-4xl lg:text-[64px] text-brand-ink mb-5" style="line-height:1.12;">
+        Tout ce qu'un RH BTP devrait avoir, <em class="text-brand">dans un seul outil.</em>
+      </h2>
+      <p class="text-lg text-brand-ink/70 leading-relaxed" style="text-wrap:pretty;">
+        Plus besoin de surfer entre plusieurs plateformes. Votre processus, votre suivi, vos entretiens : centralisés, organisés, accessibles.
+      </p>
+    </div>
+
+    <!-- Bento grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+
+      <!-- Big card — Pipeline visuel -->
+      <div class="fade-up d1 feat-card lg:col-span-7 p-8 lg:p-10 relative overflow-hidden">
+        <div class="absolute top-0 right-0 bottom-0 w-1/2 opacity-[0.04] pointer-events-none">
+          <div class="grid-texture absolute inset-0"></div>
+        </div>
+        <div class="relative">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="feat-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="5" height="18" rx="1"/><rect x="10" y="3" width="5" height="12" rx="1"/><rect x="17" y="3" width="5" height="15" rx="1"/></svg>
+            </div>
+            <span class="eyebrow text-brand-ink/60">★ FONCTION CLÉ</span>
+          </div>
+          <h3 class="display text-3xl lg:text-[38px] text-brand-ink mb-4 leading-tight">Pipeline visuel.</h3>
+          <p class="text-[16px] text-brand-ink/70 leading-relaxed mb-6 max-w-xl">Suivez chaque candidat dans un pipeline kanban clair et intuitif. Déplacez-les d'une étape à l'autre en un clic.</p>
+          <!-- Mini kanban mock-up -->
+          <div class="bg-paper rounded-xl p-4 border border-ink/5 max-w-md">
+            <div class="flex items-center gap-2 text-[11px] font-mono text-brand-ink/50 mb-3">
+              <span>PIPELINE · MAÇON QUALIFIÉ</span>
+              <div class="flex-1 h-px bg-ink/10"></div>
+              <span class="text-brand font-semibold">8 candidats</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <!-- Col 1 -->
+              <div>
+                <div class="text-[9px] font-mono text-brand-ink/40 uppercase tracking-wider mb-1.5">Nouveau</div>
+                <div class="space-y-1.5">
+                  <div class="flex items-center gap-1.5 bg-white rounded-lg px-2 py-1.5 border border-ink/8 shadow-sm">
+                    <div class="w-4 h-4 rounded-full flex-shrink-0" style="background:linear-gradient(135deg,#0077B6,#005a8a);"></div>
+                    <div class="flex-1 h-1.5 bg-ink/10 rounded"></div>
+                  </div>
+                  <div class="flex items-center gap-1.5 bg-white rounded-lg px-2 py-1.5 border border-ink/8 shadow-sm">
+                    <div class="w-4 h-4 rounded-full flex-shrink-0" style="background:linear-gradient(135deg,#8A5500,#6a4300);"></div>
+                    <div class="flex-1 h-1.5 bg-ink/10 rounded"></div>
+                  </div>
+                  <div class="flex items-center gap-1.5 bg-white rounded-lg px-2 py-1.5 border border-ink/8 shadow-sm">
+                    <div class="w-4 h-4 rounded-full flex-shrink-0" style="background:linear-gradient(135deg,#555,#333);"></div>
+                    <div class="flex-1 h-1.5 bg-ink/10 rounded"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Col 2 -->
+              <div>
+                <div class="text-[9px] font-mono text-brand-ink/40 uppercase tracking-wider mb-1.5">En cours</div>
+                <div class="space-y-1.5">
+                  <div class="flex items-center gap-1.5 bg-white rounded-lg px-2 py-1.5 border border-ink/8 shadow-sm">
+                    <div class="w-4 h-4 rounded-full flex-shrink-0" style="background:linear-gradient(135deg,#b4dc02,#9bbf00);"></div>
+                    <div class="flex-1 h-1.5 bg-ink/10 rounded"></div>
+                  </div>
+                  <div class="flex items-center gap-1.5 bg-white rounded-lg px-2 py-1.5 border border-ink/8 shadow-sm">
+                    <div class="w-4 h-4 rounded-full flex-shrink-0" style="background:linear-gradient(135deg,#0077B6,#005a8a);"></div>
+                    <div class="flex-1 h-1.5 bg-ink/10 rounded"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Col 3 -->
+              <div>
+                <div class="text-[9px] font-mono text-brand-ink/40 uppercase tracking-wider mb-1.5">Retenu</div>
+                <div class="space-y-1.5">
+                  <div class="flex items-center gap-1.5 rounded-lg px-2 py-1.5 border shadow-sm" style="background:#EDFCC4;border-color:rgba(180,220,2,0.25);">
+                    <div class="w-4 h-4 rounded-full flex-shrink-0" style="background:linear-gradient(135deg,#b4dc02,#9bbf00);"></div>
+                    <div class="flex-1 h-1.5 rounded" style="background:rgba(180,220,2,0.3);"></div>
+                    <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#3D5600" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cards 2–5: horizontal scroll strip on mobile, grid on desktop -->
+      <div class="feat-small-cards">
+
+        <!-- Card 2 — Analytics -->
+        <div class="fade-up d2 feat-card feat-small-card lg:col-span-5 p-6 lg:p-8">
+          <div class="feat-icon-wrap mb-5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3 class="display text-xl text-brand-ink mb-2">Analytics</h3>
+          <p class="text-sm text-brand-ink/70 leading-relaxed mb-4">Temps d'embauche, sources efficaces, taux de conversion. Mesurez et optimisez votre recrutement.</p>
+          <!-- Mini metric chips -->
+          <div class="flex flex-col gap-2">
+            <div class="flex items-center justify-between rounded-lg px-3 py-2 border border-ink/8" style="background:#F7F9FB;">
+              <span class="text-[11px] text-brand-ink/50 font-mono">Temps moyen d'embauche</span>
+              <span class="text-[11px] font-semibold text-brand">6 jours</span>
+            </div>
+            <div class="flex items-center justify-between rounded-lg px-3 py-2 border border-ink/8" style="background:#F7F9FB;">
+              <span class="text-[11px] text-brand-ink/50 font-mono">Taux de conversion</span>
+              <span class="text-[11px] font-semibold" style="color:#3D5600;">+34%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 — Entretiens intégrés -->
+        <div class="fade-up d3 feat-card feat-small-card lg:col-span-4 p-6 lg:p-8">
+          <div class="feat-icon-wrap mb-5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/></svg>
+          </div>
+          <h3 class="display text-xl text-brand-ink mb-3">Entretiens intégrés</h3>
+          <p class="text-sm text-brand-ink/70 leading-relaxed">Planifiez les entretiens, assignez les interviewers et centralisez les feedbacks au même endroit.</p>
+        </div>
+
+        <!-- Card 4 — Travail en équipe -->
+        <div class="fade-up d4 feat-card feat-small-card lg:col-span-4 p-6 lg:p-8">
+          <div class="feat-icon-wrap mb-5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="display text-xl text-brand-ink mb-3">Travail en équipe</h3>
+          <p class="text-sm text-brand-ink/70 leading-relaxed">Invitez vos collègues, attribuez des rôles, partagez des notes et des évaluations sur chaque candidat.</p>
+        </div>
+
+        <!-- Card 5 — Page carrière -->
+        <div class="fade-up d5 feat-card feat-small-card lg:col-span-4 p-6 lg:p-8">
+          <div class="feat-icon-wrap mb-5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3 class="display text-xl text-brand-ink mb-3">Page carrière</h3>
+          <p class="text-sm text-brand-ink/70 leading-relaxed">Une page carrière à votre image, automatiquement générée avec vos offres en cours.</p>
+        </div>
+
+      </div><!-- /feat-small-cards -->
+
+      <!-- Card 6 — dark full-width — Accompagnement dédié -->
+      <div class="fade-up d6 lg:col-span-12 p-8 lg:p-10 rounded-[18px] relative overflow-hidden" style="background:#052238;">
+        <div class="absolute inset-0 blueprint-lines opacity-60 pointer-events-none"></div>
+        <div class="relative grid md:grid-cols-3 gap-6 items-center">
+          <div class="md:col-span-1">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:#b4dc02;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A0F1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="eyebrow text-lime mb-2">HUMAIN</div>
+            <h3 class="display text-2xl lg:text-3xl text-white leading-tight">Accompagnement dédié.</h3>
+          </div>
+          <div class="md:col-span-2">
+            <p class="text-white/70 leading-relaxed mb-6" style="text-wrap:pretty;">
+              Notre équipe vous accompagne à chaque étape. Besoin d'aide pour rédiger une annonce ? <span class="text-white font-semibold">On est là.</span>
+            </p>
+            <div class="flex items-center gap-3">
+              <div class="flex -space-x-2">
+                <div class="avatar w-9 h-9 text-xs" style="background:linear-gradient(135deg,#0077B6,#005a8a);border:2px solid #052238;">SB</div>
+                <div class="avatar w-9 h-9 text-xs" style="background:linear-gradient(135deg,#b4dc02,#9bbf00);color:#0A1A00;border:2px solid #052238;">MR</div>
+                <div class="avatar w-9 h-9 text-xs" style="background:linear-gradient(135deg,#8A5500,#6a4300);border:2px solid #052238;">JL</div>
+              </div>
+              <div class="text-xs text-white/60">Conseillers CoinCarrière — Réponse sous 24h</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     06 / VIDEO
+═══════════════════════════════════════════════ -->
+<section class="bg-white py-24 px-5 sm:px-8 border-y border-ink/10">
+  <div class="max-w-4xl mx-auto">
+
+    <div class="flex items-center gap-3 mb-12 fade-up">
+      <span class="section-number">La Plateforme</span>
+      <div class="h-px flex-1 bg-ink/10"></div>
+    </div>
+
+    <div class="mb-10 fade-up d1">
+      <h2 class="display text-4xl lg:text-[56px] text-brand-ink mb-4 leading-tight" style="text-wrap:pretty;">
+        Simplifiez et clarifiez vos recrutements avec CoinCarrière.
+      </h2>
+      <p class="text-lg text-brand-ink/70 leading-relaxed max-w-2xl" style="text-wrap:pretty;">
+        De la candidature reçue à la shortlist finale, gardez une vue claire sur chaque profil.
+      </p>
+    </div>
+
+    <!-- Video container — interactive player -->
+    <div id="section-video-wrap" class="fade-up d2 video-player-wrap corner-marks">
+
+      <!-- ① Video — no autoplay, first frame as preview via preload -->
+      <video id="section-video"
+        src="demo.webm"
+        preload="metadata"
+        playsinline>
+      </video>
+
+      <!-- ② Preview overlay (fades out on play) -->
+      <div class="vp-overlay" aria-hidden="true">
+        <div class="vp-gradient"></div>
+        <div class="vp-grid-tex"></div>
+        <div class="vp-tag">16:9 · HD</div>
+        <div class="vp-meta-bar">
+          <div>
+            <p class="vp-meta-eyebrow">[ PLATEFORME · DÉMO ]</p>
+            <p class="vp-meta-title">CoinCarrière BTP — Recrutement simplifié</p>
+          </div>
+          <span class="vp-duration">—:——</span>
+        </div>
+      </div>
+
+      <!-- ③ Full-area interactive button — play circle + caption inside -->
+      <button id="vp-btn" class="vp-play-btn" aria-label="Lancer la démo">
+
+        <!-- Frosted-glass ring with state icons -->
+        <div class="vp-ring" aria-hidden="true">
+          <!-- Play ▶ -->
+          <svg class="vp-icon-play" width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <polygon points="7,4 20,12 7,20" fill="currentColor"/>
+          </svg>
+          <!-- Pause ⏸ -->
+          <svg class="vp-icon-pause" width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <rect x="5" y="3" width="4" height="18" rx="1.5" fill="currentColor"/>
+            <rect x="15" y="3" width="4" height="18" rx="1.5" fill="currentColor"/>
+          </svg>
+          <!-- Replay ↺ -->
+          <svg class="vp-icon-replay" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1 4 1 10 7 10"/>
+            <path d="M3.51 15a9 9 0 1 0 .49-5.09"/>
+          </svg>
+        </div>
+
+        <!-- Caption hint — fades out during playback -->
+        <span class="vp-hint" aria-hidden="true">
+          Voir comment ça marche
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </span>
+
+      </button>
+
+      <!-- ④ Thin progress bar — appears once video starts -->
+      <div class="vp-progress-wrap" aria-hidden="true">
+        <div id="vp-progress-fill" class="vp-progress-fill"></div>
+      </div>
+
+    </div>
+
+
+  </div>
+</section>
+
+
+
+
+<!-- ═══════════════════════════════════════════════
+     08 / FINAL CTA
+═══════════════════════════════════════════════ -->
+<section id="final-cta" class="relative bg-paper overflow-hidden" style="padding-top:140px;padding-bottom:140px;">
+  <div class="absolute inset-0 grid-texture opacity-50 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 text-center">
+
+    <div class="flex items-center justify-center gap-3 mb-10 fade-up">
+      <div class="h-px w-20 bg-ink/20"></div>
+      <div class="h-px w-20 bg-ink/20"></div>
+    </div>
+
+    <h2 class="fade-up d1 display text-3xl sm:text-5xl lg:text-[84px] text-brand-ink mb-8 sm:mb-10 leading-[1.05] sm:leading-[0.96]" style="text-wrap:pretty;">
+      Votre prochain recrutement BTP <em style="color:#0077B6;">commence ici.</em>
+    </h2>
+
+    <p class="fade-up d2 text-brand-ink/70 text-lg lg:text-xl mb-12 leading-relaxed max-w-2xl mx-auto" style="text-wrap:pretty;">
+      Créez votre espace recruteur et publiez votre première annonce en moins de 5 minutes.
+    </p>
+
+    <div class="fade-up d3 flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+      <a href="https://coincarriere.com/register?type=company" target="_blank" rel="noopener"
+         onclick="fbq('track','Lead')"
+         class="btn-primary inline-flex items-center justify-center gap-2 px-10 py-5 rounded-xl text-xl min-h-[64px] w-full sm:w-auto">
+        <span>Publier votre annonce maintenant</span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <p class="fade-up d4 eyebrow text-brand-ink/50 flex justify-center flex-wrap gap-x-4 gap-y-1">
+      <span>Gratuit pour commencer. Aucun engagement pour publier votre première annonce.</span>
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer class="bg-brand-ink py-10 px-5 sm:px-8">
+  <div class="max-w-4xl mx-auto flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
+
+    <!-- Copyright -->
+    <p class="eyebrow text-white/40 text-center sm:text-left">© 2026 CoinCarrière — coincarriere.com</p>
+
+    <!-- Legal links -->
+    <div class="flex items-center gap-2">
+      <button onclick="openLegalModal('pc')" class="eyebrow text-white/30 hover:text-white/60 transition-colors duration-200" style="background:none;border:0;padding:0;cursor:pointer;">Politique de Confidentialité</button>
+      <span class="eyebrow text-white/20" aria-hidden="true">·</span>
+      <button onclick="openLegalModal('cgu')" class="eyebrow text-white/30 hover:text-white/60 transition-colors duration-200" style="background:none;border:0;padding:0;cursor:pointer;">CGU</button>
+    </div>
+
+  </div>
+</footer>
+
+
+  <!-- ─── Mobile sticky CTA — architectural command strip ─── -->
+  <div id="mobile-cta" class="mcta-hidden" aria-label="Publier une offre BTP">
+
+    <!-- Scroll-depth progress thread -->
+    <div class="mcta-thread" aria-hidden="true">
+      <div class="mcta-thread-fill" id="mcta-thread-fill"></div>
+    </div>
+
+    <!-- ① PEEK state — minimal signal bar -->
+    <a class="mcta-peek-bar"
+       href="https://coincarriere.com/register?type=company"
+       target="_blank" rel="noopener"
+       onclick="if(window.fbq)fbq('track','Lead')"
+       aria-label="Publier une offre BTP — Gratuit">
+      <span class="mcta-signal-dot" aria-hidden="true"></span>
+      <span class="mcta-peek-copy">Publier une offre BTP</span>
+      <span class="mcta-peek-free" aria-hidden="true">Gratuit</span>
+      <svg class="mcta-peek-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <!-- ② FULL + INTENT state — command interface -->
+    <div class="mcta-command">
+
+      <!-- Top meta row -->
+      <div class="mcta-meta-row" aria-hidden="true">
+        <span class="mcta-meta-label">OFFRE BTP · GRATUIT</span>
+        <span class="mcta-meta-stat">457+ RH · dès 48h</span>
+      </div>
+
+      <!-- Primary action -->
+      <a class="mcta-action"
+         href="https://coincarriere.com/register?type=company"
+         target="_blank" rel="noopener"
+         onclick="if(window.fbq)fbq('track','Lead')">
+        <span>Publier ma première offre BTP</span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+
+      <!-- Reassurance -->
+      <div class="mcta-assurance" aria-hidden="true">
+        <span>Sans engagement</span>
+        <span class="mcta-dot-sep" aria-hidden="true">·</span>
+        <span>Sans carte bancaire</span>
+        <span class="mcta-dot-sep" aria-hidden="true">·</span>
+        <span>5 min</span>
+      </div>
+
+    </div>
+
+    <!-- Blueprint grid — appears only on intent -->
+    <div class="mcta-blueprint" aria-hidden="true"></div>
+
+  </div>
+
+  <!-- ─── Ambient CTA — context-aware 5-state ───────── -->
+  <aside id="smart-cta" class="scta-dormant" aria-label="Publier une offre BTP">
+
+    <!-- Progress rail: right-edge thread -->
+    <div id="scta-rail" aria-hidden="true">
+      <div id="scta-rail-fill"></div>
+      <!-- Crosshair tick: marks reading position on the rail -->
+      <div id="scta-rail-tick" aria-hidden="true"></div>
+    </div>
+
+    <!-- Floating node: anchored at reading-position height -->
+    <div id="scta-node" tabindex="0" role="complementary" aria-label="Publier une offre BTP">
+
+      <!-- Layer 0 — Seed: single architectural dot  -->
+      <div class="scta-l scta-l-seed" aria-hidden="true">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <circle cx="6" cy="6" r="2.2" fill="#b4dc02"/>
+          <circle cx="6" cy="6" r="4.5" stroke="#b4dc02" stroke-width="0.8" opacity="0.28"/>
+        </svg>
+      </div>
+
+      <!-- Layer 1 — Brief: icon + short label -->
+      <div class="scta-l scta-l-brief" aria-hidden="true">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#b4dc02" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="12" y1="17" x2="8" y2="17"/>
+        </svg>
+        <span>Publier</span>
+      </div>
+
+      <!-- Layer 2 — Full CTA -->
+      <div class="scta-l scta-l-full">
+        <p class="scta-eyebrow">OFFRE BTP · GRATUIT</p>
+        <a href="https://coincarriere.com/register?type=company"
+           target="_blank" rel="noopener"
+           id="scta-action"
+           onclick="if(window.fbq)fbq('track','Lead')">
+          Publier ma première offre
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+            <path d="M1 6h10M7 2.5l3.5 3.5L7 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <p class="scta-sub">Sans engagement · En ligne en 5 min</p>
+      </div>
+
+    </div>
+  </aside>
+
+<script src="script.js" defer></script>
+
+
+<!-- ═══════════════════════════════════════════════
+     LEGAL MODAL
+═══════════════════════════════════════════════ -->
+<div id="legal-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="legal-modal-title">
+  <div id="legal-modal-panel">
+    <div id="legal-modal-header">
+      <div>
+        <span id="legal-modal-eyebrow"></span>
+        <span id="legal-modal-title"></span>
+        <span id="legal-modal-date-label"></span>
+      </div>
+      <button id="legal-modal-close" aria-label="Fermer">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div id="legal-modal-body"></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     HIDDEN LEGAL CONTENT — Politique de Confidentialité
+═══════════════════════════════════════════════ -->
+<div id="lm-content-pc" style="display:none;" aria-hidden="true">
+
+  <div class="toc">
+    <div class="toc-title">Sommaire</div>
+    <ol>
+      <li><a href="#pc1"><span class="toc-num">01</span>Identité du responsable</a></li>
+      <li><a href="#pc2"><span class="toc-num">02</span>Champ d'application</a></li>
+      <li><a href="#pc3"><span class="toc-num">03</span>Renseignements collectés</a></li>
+      <li><a href="#pc4"><span class="toc-num">04</span>Finalités et bases légales</a></li>
+      <li><a href="#pc5"><span class="toc-num">05</span>Partage des renseignements</a></li>
+      <li><a href="#pc6"><span class="toc-num">06</span>Transferts hors Québec</a></li>
+      <li><a href="#pc7"><span class="toc-num">07</span>Conservation des données</a></li>
+      <li><a href="#pc8"><span class="toc-num">08</span>Témoins (cookies)</a></li>
+      <li><a href="#pc9"><span class="toc-num">09</span>Vos droits</a></li>
+      <li><a href="#pc10"><span class="toc-num">10</span>Sécurité</a></li>
+      <li><a href="#pc11"><span class="toc-num">11</span>Protection des mineurs</a></li>
+      <li><a href="#pc12"><span class="toc-num">12</span>Incident de confidentialité</a></li>
+      <li><a href="#pc13"><span class="toc-num">13</span>Modifications</a></li>
+      <li><a href="#pc14"><span class="toc-num">14</span>Contact</a></li>
+    </ol>
+  </div>
+
+  <div class="legal-section" id="pc1">
+    <h2><span class="sec-num">Art. 1</span> Identité du responsable du traitement</h2>
+    <p>Le site <a href="https://coincarriere.com" target="_blank" rel="noopener">coincarriere.com</a> (ci-après « CoinCarrière » ou « la Plateforme ») est exploité par :</p>
+    <div class="contact-card">
+      <p><strong>Raison sociale :</strong> 9558-9321 Québec inc., faisant affaire sous le nom CoinCarrière</p>
+      <p><strong>NEQ :</strong> 1181724304</p>
+      <p><strong>Siège social :</strong> Québec, QC, Canada</p>
+      <p><strong>Courriel :</strong> <a href="mailto:contact@coincarriere.com">contact@coincarriere.com</a></p>
+      <p><strong>Site web :</strong> <a href="https://coincarriere.com" target="_blank" rel="noopener">https://coincarriere.com</a></p>
+    </div>
+    <p style="margin-top:14px;">Le responsable de la protection des renseignements personnels est le plus haut dirigeant de l'entreprise, joignable à l'adresse ci-dessus.</p>
+  </div>
+
+  <div class="legal-section" id="pc2">
+    <h2><span class="sec-num">Art. 2</span> Champ d'application</h2>
+    <p>La présente politique s'applique à tous les utilisateurs de la Plateforme, qu'ils soient candidats, recruteurs, employeurs ou simples visiteurs, et ce, quel que soit leur lieu de résidence. Elle couvre l'ensemble des renseignements personnels collectés via le site web, les formulaires, le dépôt de CV, la création de compte et l'utilisation des services de recrutement.</p>
+    <p>CoinCarrière se conforme aux lois applicables en matière de protection des renseignements personnels, notamment :</p>
+    <ul>
+      <li>La Loi sur la protection des renseignements personnels dans le secteur privé du Québec (RLRQ, c. P-39.1), telle que modernisée par la Loi 25</li>
+      <li>La Loi sur la protection des renseignements personnels et les documents électroniques (LPRPDE) du Canada</li>
+      <li>Le Règlement général sur la protection des données (RGPD) de l'Union européenne, pour les utilisateurs situés dans l'Espace économique européen</li>
+      <li>La Loi n° 09-08 relative à la protection des personnes physiques à l'égard du traitement des données à caractère personnel du Maroc, pour les utilisateurs situés au Maroc</li>
+    </ul>
+  </div>
+
+  <div class="legal-section" id="pc3">
+    <h2><span class="sec-num">Art. 3</span> Renseignements personnels collectés</h2>
+    <h3>3.1 Renseignements fournis directement par l'utilisateur</h3>
+    <ul>
+      <li><strong>Identification :</strong> prénom, nom, adresse courriel, numéro de téléphone</li>
+      <li><strong>Informations professionnelles :</strong> curriculum vitae (CV), lettre de motivation, expérience professionnelle, formation, compétences, certifications</li>
+      <li><strong>Informations de profil :</strong> ville, pays, lien LinkedIn, site web personnel</li>
+      <li><strong>Informations de compte :</strong> identifiants de connexion, mot de passe (chiffré), préférences de notification</li>
+      <li><strong>Correspondances :</strong> messages échangés via la Plateforme, réponses aux formulaires de candidature</li>
+    </ul>
+    <h3>3.2 Renseignements collectés automatiquement</h3>
+    <ul>
+      <li><strong>Données techniques :</strong> adresse IP, type et version du navigateur, système d'exploitation, résolution d'écran</li>
+      <li><strong>Données de navigation :</strong> pages consultées, durée des visites, pages de renvoi, parcours de navigation</li>
+      <li><strong>Témoins (cookies) :</strong> témoins de session, témoins analytiques, témoins publicitaires (voir section 8)</li>
+      <li><strong>Données de localisation :</strong> pays et région déduits de l'adresse IP</li>
+    </ul>
+    <h3>3.3 Renseignements reçus de tiers</h3>
+    <ul>
+      <li>Informations transmises par un employeur ou recruteur qui crée un profil candidat dans le cadre d'un processus de recrutement</li>
+      <li>Informations provenant de sources publiques (offres d'emploi publiées sur des sites tiers)</li>
+    </ul>
+  </div>
+
+  <div class="legal-section" id="pc4">
+    <h2><span class="sec-num">Art. 4</span> Finalités et bases légales du traitement</h2>
+    <table class="data-table">
+      <thead><tr><th>Finalité</th><th>Base légale</th></tr></thead>
+      <tbody>
+        <tr><td>Fournir les services de recrutement (mise en relation candidats-employeurs)</td><td>Exécution du contrat</td></tr>
+        <tr><td>Créer et gérer les comptes utilisateurs</td><td>Exécution du contrat</td></tr>
+        <tr><td>Permettre le dépôt et la consultation de CV</td><td>Consentement</td></tr>
+        <tr><td>Transmettre les candidatures aux employeurs</td><td>Consentement</td></tr>
+        <tr><td>Envoyer des notifications relatives aux candidatures</td><td>Exécution du contrat</td></tr>
+        <tr><td>Envoyer des communications marketing et newsletters</td><td>Consentement</td></tr>
+        <tr><td>Améliorer la Plateforme et analyser son utilisation</td><td>Intérêt légitime</td></tr>
+        <tr><td>Prévenir la fraude et assurer la sécurité</td><td>Intérêt légitime</td></tr>
+        <tr><td>Respecter les obligations légales et réglementaires</td><td>Obligation légale</td></tr>
+        <tr><td>Répondre aux demandes et au support</td><td>Intérêt légitime</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="legal-section" id="pc5">
+    <h2><span class="sec-num">Art. 5</span> Partage et communication des renseignements</h2>
+    <h3>5.1 Employeurs et recruteurs</h3>
+    <p>Lorsque vous postulez à une offre d'emploi ou déposez votre CV, vos informations professionnelles sont transmises aux employeurs concernés afin de traiter votre candidature. Les employeurs sont tenus de respecter la confidentialité de ces informations.</p>
+    <h3>5.2 Sous-traitants et fournisseurs de services</h3>
+    <ul>
+      <li><strong>Cloudflare, Inc.</strong> — hébergement, stockage (R2), base de données (D1), CDN</li>
+      <li><strong>Google LLC</strong> — Google Analytics, Google Ads</li>
+      <li><strong>Meta Platforms, Inc.</strong> — Facebook Ads</li>
+      <li><strong>Amazon Web Services</strong> — envoi de courriels transactionnels (SES)</li>
+    </ul>
+    <p>Ces sous-traitants n'utilisent vos données que dans le cadre des services qu'ils nous fournissent et sont liés par des obligations contractuelles de confidentialité.</p>
+    <h3>5.3 Autorités légales</h3>
+    <p>Nous pouvons communiquer vos renseignements aux autorités compétentes lorsque la loi l'exige, dans le cadre d'une procédure judiciaire, ou pour protéger nos droits légaux.</p>
+    <h3>5.4 Ce que nous ne faisons pas</h3>
+    <div class="notice-box">
+      <p>Nous ne vendons jamais vos renseignements personnels à des tiers. Nous ne louons pas, n'échangeons pas et ne monétisons pas vos données personnelles.</p>
+    </div>
+  </div>
+
+  <div class="legal-section" id="pc6">
+    <h2><span class="sec-num">Art. 6</span> Transferts hors du Québec et du Canada</h2>
+    <p>Certains de nos sous-traitants sont situés aux États-Unis (Cloudflare, Google, Meta, AWS). Vos renseignements personnels peuvent donc être transférés et traités en dehors du Québec et du Canada.</p>
+    <p>Conformément à la Loi 25, avant tout transfert, nous réalisons une évaluation des facteurs relatifs à la vie privée (EFVP). Ces transferts sont encadrés par des clauses contractuelles appropriées.</p>
+    <p>Pour les utilisateurs situés dans l'Union européenne, ces transferts sont effectués sur la base de clauses contractuelles types approuvées par la Commission européenne.</p>
+  </div>
+
+  <div class="legal-section" id="pc7">
+    <h2><span class="sec-num">Art. 7</span> Conservation des renseignements</h2>
+    <table class="data-table">
+      <thead><tr><th>Type de données</th><th>Durée de conservation</th></tr></thead>
+      <tbody>
+        <tr><td>Curriculum vitae (CV) déposés</td><td>5 ans à compter du dépôt ou de la dernière mise à jour</td></tr>
+        <tr><td>Comptes candidats</td><td>5 ans après la dernière connexion</td></tr>
+        <tr><td>Comptes employeurs / recruteurs</td><td>Durée de la relation contractuelle + 3 ans</td></tr>
+        <tr><td>Données de candidature</td><td>5 ans après la clôture du poste</td></tr>
+        <tr><td>Journaux d'audit</td><td>3 ans</td></tr>
+        <tr><td>Données analytiques (anonymisées)</td><td>26 mois</td></tr>
+        <tr><td>Correspondances / messages</td><td>5 ans</td></tr>
+      </tbody>
+    </table>
+    <p>À l'expiration de ces délais, les renseignements sont supprimés ou anonymisés de manière irréversible.</p>
+  </div>
+
+  <div class="legal-section" id="pc8">
+    <h2><span class="sec-num">Art. 8</span> Témoins (cookies) et technologies de suivi</h2>
+    <h3>8.1 Catégories de témoins utilisés</h3>
+    <table class="data-table">
+      <thead><tr><th>Catégorie</th><th>Finalité</th><th>Durée</th><th>Fournisseur</th></tr></thead>
+      <tbody>
+        <tr><td>Essentiels</td><td>Authentification, sécurité, fonctionnement</td><td>Session / 7j</td><td>CoinCarrière</td></tr>
+        <tr><td>Analytiques</td><td>Mesure d'audience</td><td>26 mois</td><td>Google Analytics</td></tr>
+        <tr><td>Publicitaires</td><td>Publicités personnalisées</td><td>90 jours</td><td>Google Ads, Meta Ads</td></tr>
+      </tbody>
+    </table>
+    <h3>8.2 Gestion des témoins</h3>
+    <ul>
+      <li>Via les paramètres de votre navigateur (bloquer ou supprimer les témoins)</li>
+      <li>Via les outils de désactivation de Google Analytics</li>
+      <li>Via les paramètres publicitaires de votre compte Google ou Facebook</li>
+    </ul>
+  </div>
+
+  <div class="legal-section" id="pc9">
+    <h2><span class="sec-num">Art. 9</span> Vos droits</h2>
+    <h3>Pour tous les utilisateurs (Loi 25 / LPRPDE)</h3>
+    <ul>
+      <li><strong>Droit d'accès :</strong> obtenir la confirmation que nous détenons des renseignements vous concernant</li>
+      <li><strong>Droit de rectification :</strong> faire corriger des renseignements inexacts ou incomplets</li>
+      <li><strong>Droit de suppression :</strong> demander la suppression de vos renseignements</li>
+      <li><strong>Droit de retirer votre consentement :</strong> retirer à tout moment un consentement préalablement donné</li>
+      <li><strong>Droit à la désindexation :</strong> demander la cessation de la diffusion de vos renseignements</li>
+      <li><strong>Droit à la portabilité :</strong> recevoir vos renseignements dans un format structuré</li>
+    </ul>
+    <h3>Droits additionnels pour les utilisateurs dans l'UE/EEE (RGPD)</h3>
+    <ul>
+      <li><strong>Droit d'opposition :</strong> vous opposer au traitement fondé sur l'intérêt légitime</li>
+      <li><strong>Droit à la limitation :</strong> demander la restriction du traitement</li>
+      <li><strong>Droit d'introduire une réclamation :</strong> auprès de l'autorité de contrôle compétente (ex. : CNIL)</li>
+    </ul>
+    <h3>Droits additionnels pour les utilisateurs au Maroc (Loi 09-08)</h3>
+    <ul>
+      <li><strong>Droit d'opposition :</strong> pour des motifs légitimes, au traitement de vos données</li>
+      <li><strong>Droit d'introduire une réclamation :</strong> auprès de la CNDP</li>
+    </ul>
+    <h3>Comment exercer vos droits</h3>
+    <div class="notice-box">
+      <p>Envoyez votre demande à <a href="mailto:contact@coincarriere.com">contact@coincarriere.com</a> en précisant votre nom, votre adresse courriel et le droit que vous souhaitez exercer. Nous répondrons dans un délai de 30 jours.</p>
+    </div>
+  </div>
+
+  <div class="legal-section" id="pc10">
+    <h2><span class="sec-num">Art. 10</span> Sécurité des renseignements</h2>
+    <ul>
+      <li>Chiffrement des mots de passe (hachage irréversible)</li>
+      <li>Chiffrement des communications (HTTPS/TLS)</li>
+      <li>Authentification par jetons sécurisés (JWT) avec expiration</li>
+      <li>Isolation des données par organisation (architecture multi-tenant)</li>
+      <li>Contrôle d'accès basé sur les rôles (RBAC)</li>
+      <li>Journaux d'audit sur toutes les opérations sensibles</li>
+      <li>Limitation du débit des requêtes (rate limiting)</li>
+      <li>Sauvegardes régulières des données</li>
+    </ul>
+    <p>Malgré ces mesures, aucune méthode de transmission ou de stockage électronique n'est totalement sécurisée.</p>
+  </div>
+
+  <div class="legal-section" id="pc11">
+    <h2><span class="sec-num">Art. 11</span> Protection des mineurs</h2>
+    <p>La Plateforme est destinée aux personnes âgées de 16 ans et plus. Nous ne collectons pas sciemment de renseignements personnels auprès de personnes de moins de 16 ans. Si nous apprenons que nous avons collecté des renseignements d'un mineur, nous les supprimerons dans les plus brefs délais.</p>
+  </div>
+
+  <div class="legal-section" id="pc12">
+    <h2><span class="sec-num">Art. 12</span> Incident de confidentialité</h2>
+    <p>Conformément à la Loi 25, en cas d'incident présentant un risque de préjudice sérieux, nous :</p>
+    <ul>
+      <li>Prendrons les mesures raisonnables pour diminuer les risques</li>
+      <li>Aviserons la Commission d'accès à l'information du Québec (CAI)</li>
+      <li>Aviserons les personnes concernées</li>
+      <li>Tiendrons un registre de l'incident</li>
+    </ul>
+  </div>
+
+  <div class="legal-section" id="pc13">
+    <h2><span class="sec-num">Art. 13</span> Modifications de cette politique</h2>
+    <p>Nous pouvons mettre à jour cette politique périodiquement. En cas de modification substantielle, nous vous en informerons par courriel ou par un avis bien visible sur la Plateforme.</p>
+  </div>
+
+  <div class="legal-section" id="pc14">
+    <h2><span class="sec-num">Art. 14</span> Contact</h2>
+    <p>Pour toute question relative à cette politique ou pour exercer vos droits :</p>
+    <div class="contact-card">
+      <p><strong>Courriel :</strong> <a href="mailto:contact@coincarriere.com">contact@coincarriere.com</a></p>
+      <p><strong>Entreprise :</strong> 9558-9321 Québec inc. (CoinCarrière)</p>
+      <p><strong>Siège social :</strong> Québec, QC, Canada</p>
+    </div>
+    <h3 style="margin-top:20px;">Autorités de contrôle</h3>
+    <ul>
+      <li><strong>Québec :</strong> Commission d'accès à l'information (CAI) — <a href="https://www.cai.gouv.qc.ca" target="_blank" rel="noopener">cai.gouv.qc.ca</a></li>
+      <li><strong>Canada :</strong> Commissariat à la protection de la vie privée — <a href="https://www.priv.gc.ca" target="_blank" rel="noopener">priv.gc.ca</a></li>
+      <li><strong>Union européenne :</strong> l'autorité de contrôle de votre pays de résidence</li>
+      <li><strong>Maroc :</strong> CNDP — <a href="https://www.cndp.ma" target="_blank" rel="noopener">cndp.ma</a></li>
+    </ul>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     HIDDEN LEGAL CONTENT — CGU
+═══════════════════════════════════════════════ -->
+<div id="lm-content-cgu" style="display:none;" aria-hidden="true">
+
+  <div class="toc">
+    <div class="toc-title">Sommaire</div>
+    <ol>
+      <li><a href="#art1"><span class="toc-num">01</span>Objet</a></li>
+      <li><a href="#art2"><span class="toc-num">02</span>Définitions</a></li>
+      <li><a href="#art3"><span class="toc-num">03</span>Inscription et compte</a></li>
+      <li><a href="#art4"><span class="toc-num">04</span>Services proposés</a></li>
+      <li><a href="#art5"><span class="toc-num">05</span>Obligations des Utilisateurs</a></li>
+      <li><a href="#art6"><span class="toc-num">06</span>Contenu publié</a></li>
+      <li><a href="#art7"><span class="toc-num">07</span>Propriété intellectuelle</a></li>
+      <li><a href="#art8"><span class="toc-num">08</span>Limitation de responsabilité</a></li>
+      <li><a href="#art9"><span class="toc-num">09</span>Suspension et résiliation</a></li>
+      <li><a href="#art10"><span class="toc-num">10</span>Données personnelles</a></li>
+      <li><a href="#art11"><span class="toc-num">11</span>Liens tiers</a></li>
+      <li><a href="#art12"><span class="toc-num">12</span>Modifications</a></li>
+      <li><a href="#art13"><span class="toc-num">13</span>Droit applicable</a></li>
+      <li><a href="#art14"><span class="toc-num">14–17</span>Dispositions finales</a></li>
+    </ol>
+  </div>
+
+  <div class="legal-section" id="art1">
+    <h2><span class="sec-num">Art. 1</span> Objet</h2>
+    <p>Les présentes Conditions Générales d'Utilisation (« CGU ») régissent l'accès et l'utilisation de la plateforme CoinCarrière, accessible à l'adresse <a href="https://coincarriere.com" target="_blank" rel="noopener">coincarriere.com</a>, exploitée par 9558-9321 Québec inc. (NEQ : 1181724304), dont le siège social est situé à Québec, QC, Canada.</p>
+    <p>En accédant à la Plateforme ou en utilisant ses services, vous acceptez d'être lié par les présentes CGU. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser la Plateforme.</p>
+  </div>
+
+  <div class="legal-section" id="art2">
+    <h2><span class="sec-num">Art. 2</span> Définitions</h2>
+    <ul>
+      <li><strong>Plateforme :</strong> le site web coincarriere.com et l'ensemble des services associés</li>
+      <li><strong>Utilisateur :</strong> toute personne accédant à la Plateforme, qu'elle soit inscrite ou non</li>
+      <li><strong>Candidat :</strong> tout Utilisateur inscrit utilisant la Plateforme pour rechercher un emploi ou postuler</li>
+      <li><strong>Employeur :</strong> toute personne morale ou physique utilisant la Plateforme pour publier des offres et gérer des recrutements</li>
+      <li><strong>Recruteur :</strong> tout utilisateur agissant pour le compte d'un Employeur sur la Plateforme</li>
+      <li><strong>Contenu :</strong> tout texte, image, fichier, CV, offre d'emploi ou autre information publié sur la Plateforme</li>
+      <li><strong>Services :</strong> l'ensemble des fonctionnalités offertes par la Plateforme</li>
+    </ul>
+  </div>
+
+  <div class="legal-section" id="art3">
+    <h2><span class="sec-num">Art. 3</span> Inscription et compte utilisateur</h2>
+    <h3>3.1 Création de compte</h3>
+    <p>L'accès à certains Services nécessite la création d'un compte. Lors de l'inscription, vous vous engagez à :</p>
+    <ul>
+      <li>Fournir des informations exactes, complètes et à jour</li>
+      <li>Maintenir la confidentialité de vos identifiants de connexion</li>
+      <li>Nous informer immédiatement de toute utilisation non autorisée de votre compte</li>
+      <li>Ne pas créer plusieurs comptes pour la même personne</li>
+    </ul>
+    <h3>3.2 Âge minimum</h3>
+    <p>Vous devez être âgé d'au moins 16 ans pour utiliser la Plateforme.</p>
+    <h3>3.3 Responsabilité du compte</h3>
+    <p>Vous êtes seul responsable de toutes les activités effectuées sous votre compte.</p>
+  </div>
+
+  <div class="legal-section" id="art4">
+    <h2><span class="sec-num">Art. 4</span> Services proposés</h2>
+    <h3>4.1 Pour les Candidats</h3>
+    <ul>
+      <li>Consultation des offres d'emploi publiées</li>
+      <li>Dépôt de CV et création de profil professionnel</li>
+      <li>Candidature en ligne aux offres d'emploi</li>
+      <li>Suivi de l'avancement des candidatures</li>
+      <li>Réception de notifications relatives aux candidatures</li>
+    </ul>
+    <h3>4.2 Pour les Employeurs et Recruteurs</h3>
+    <ul>
+      <li>Publication et gestion d'offres d'emploi</li>
+      <li>Réception et gestion des candidatures</li>
+      <li>Consultation des CV et profils de Candidats</li>
+      <li>Planification et gestion d'entretiens</li>
+      <li>Évaluation des Candidats et gestion du pipeline de recrutement</li>
+      <li>Outils d'analyse et de reporting</li>
+    </ul>
+    <h3>4.3 Disponibilité</h3>
+    <p>CoinCarrière s'efforce d'assurer la disponibilité de la Plateforme 24h/24, 7j/7, sans garantir un accès ininterrompu.</p>
+  </div>
+
+  <div class="legal-section" id="art5">
+    <h2><span class="sec-num">Art. 5</span> Obligations des Utilisateurs</h2>
+    <h3>5.1 Obligations générales</h3>
+    <ul>
+      <li>Respecter les lois et règlements en vigueur</li>
+      <li>Ne pas publier de contenu illicite, diffamatoire, discriminatoire ou portant atteinte aux droits de tiers</li>
+      <li>Ne pas usurper l'identité d'une autre personne ou entité</li>
+      <li>Ne pas utiliser la Plateforme à des fins frauduleuses ou malveillantes</li>
+      <li>Ne pas tenter d'accéder de manière non autorisée aux systèmes de la Plateforme</li>
+      <li>Ne pas utiliser de robots ou scrapers pour collecter des données</li>
+    </ul>
+    <h3>5.2 Obligations spécifiques aux Candidats</h3>
+    <ul>
+      <li>Fournir des informations véridiques dans leur CV et profil</li>
+      <li>Ne pas postuler à des offres de manière abusive</li>
+    </ul>
+    <h3>5.3 Obligations spécifiques aux Employeurs</h3>
+    <ul>
+      <li>Publier des offres d'emploi réelles, licites et non discriminatoires</li>
+      <li>Respecter la législation du travail applicable</li>
+      <li>Traiter les données des Candidats conformément aux lois sur la protection des renseignements personnels</li>
+      <li>Ne pas publier d'offres trompeuses ou de schèmes pyramidaux</li>
+    </ul>
+  </div>
+
+  <div class="legal-section" id="art6">
+    <h2><span class="sec-num">Art. 6</span> Contenu publié par les Utilisateurs</h2>
+    <h3>6.1 Propriété du contenu</h3>
+    <p>Vous conservez la propriété intellectuelle du Contenu que vous publiez. En publiant du Contenu, vous accordez à CoinCarrière une licence non exclusive, mondiale et gratuite pour l'utiliser dans le cadre du fonctionnement des Services.</p>
+    <h3>6.2 Responsabilité du contenu</h3>
+    <p>Vous êtes seul responsable du Contenu que vous publiez. CoinCarrière n'effectue pas de vérification systématique du Contenu publié.</p>
+    <h3>6.3 Modération</h3>
+    <p>CoinCarrière se réserve le droit de supprimer tout Contenu qui contreviendrait aux présentes CGU ou aux lois applicables, sans préavis ni indemnisation.</p>
+  </div>
+
+  <div class="legal-section" id="art7">
+    <h2><span class="sec-num">Art. 7</span> Propriété intellectuelle</h2>
+    <p>L'ensemble des éléments de la Plateforme (design, logos, textes, code source, bases de données) est la propriété exclusive de 9558-9321 Québec inc. et est protégé par les lois sur la propriété intellectuelle.</p>
+    <p>Le nom « CoinCarrière », le logo et les marques associées sont des marques de 9558-9321 Québec inc. Leur utilisation sans autorisation écrite préalable est interdite.</p>
+  </div>
+
+  <div class="legal-section" id="art8">
+    <h2><span class="sec-num">Art. 8</span> Limitation de responsabilité</h2>
+    <h3>8.1 Rôle d'intermédiaire</h3>
+    <ul>
+      <li>Nous ne sommes pas partie aux relations de travail entre Candidats et Employeurs</li>
+      <li>Nous ne garantissons pas l'obtention d'un emploi pour les Candidats</li>
+      <li>Nous ne garantissons pas la qualité des Candidats pour les Employeurs</li>
+    </ul>
+    <h3>8.2 Exclusion de garanties</h3>
+    <p>La Plateforme est fournie « telle quelle ». Dans les limites permises par la loi, CoinCarrière exclut toute garantie expresse ou implicite.</p>
+    <h3>8.3 Plafond de responsabilité</h3>
+    <p>La responsabilité totale de CoinCarrière est limitée au montant des frais versés au cours des douze mois précédant le dommage, ou à 100 $ CAD si aucun frais n'a été versé.</p>
+  </div>
+
+  <div class="legal-section" id="art9">
+    <h2><span class="sec-num">Art. 9</span> Suspension et résiliation</h2>
+    <h3>9.1 Par l'Utilisateur</h3>
+    <p>Vous pouvez à tout moment demander la suppression de votre compte en nous contactant à <a href="mailto:contact@coincarriere.com">contact@coincarriere.com</a>.</p>
+    <h3>9.2 Par CoinCarrière</h3>
+    <p>Nous nous réservons le droit de suspendre ou de résilier votre accès, sans préavis, en cas de violation des CGU, comportement frauduleux, publication de contenu illicite, ou atteinte à la sécurité de la Plateforme.</p>
+  </div>
+
+  <div class="legal-section" id="art10">
+    <h2><span class="sec-num">Art. 10</span> Protection des renseignements personnels</h2>
+    <p>La collecte et le traitement de vos renseignements personnels sont régis par notre Politique de confidentialité, qui fait partie intégrante des présentes CGU. En utilisant la Plateforme, vous reconnaissez avoir pris connaissance de cette politique.</p>
+  </div>
+
+  <div class="legal-section" id="art11">
+    <h2><span class="sec-num">Art. 11</span> Liens vers des sites tiers</h2>
+    <p>La Plateforme peut contenir des liens vers des sites web de tiers fournis à titre informatif uniquement. CoinCarrière n'est pas responsable de leur contenu, de leurs pratiques de confidentialité ou de leur disponibilité.</p>
+  </div>
+
+  <div class="legal-section" id="art12">
+    <h2><span class="sec-num">Art. 12</span> Modifications des CGU</h2>
+    <p>CoinCarrière se réserve le droit de modifier les présentes CGU à tout moment. En cas de modification substantielle, nous vous en informerons par un avis sur la Plateforme ou par courriel. La poursuite de l'utilisation de la Plateforme vaut acceptation des CGU modifiées.</p>
+  </div>
+
+  <div class="legal-section" id="art13">
+    <h2><span class="sec-num">Art. 13</span> Droit applicable et juridiction</h2>
+    <p>Les présentes CGU sont régies par les lois de la province de Québec et les lois fédérales du Canada applicables. Tout différend sera soumis à la compétence exclusive des tribunaux du district judiciaire de Québec, Canada.</p>
+  </div>
+
+  <div class="legal-section" id="art14">
+    <h2><span class="sec-num">Art. 14–17</span> Dispositions finales</h2>
+    <h3>14. Divisibilité</h3>
+    <p>Si une disposition est jugée invalide par un tribunal compétent, les autres dispositions demeurent pleinement en vigueur.</p>
+    <h3>15. Renonciation</h3>
+    <p>Le fait pour CoinCarrière de ne pas exercer un droit prévu aux CGU ne constitue pas une renonciation à ce droit.</p>
+    <h3>16. Intégralité de l'accord</h3>
+    <p>Les présentes CGU, conjointement avec la Politique de confidentialité, constituent l'intégralité de l'accord entre vous et CoinCarrière concernant l'utilisation de la Plateforme.</p>
+    <h3>17. Contact</h3>
+    <div class="contact-card">
+      <p><strong>Courriel :</strong> <a href="mailto:contact@coincarriere.com">contact@coincarriere.com</a></p>
+      <p><strong>Entreprise :</strong> 9558-9321 Québec inc. (CoinCarrière)</p>
+      <p><strong>Siège social :</strong> Québec, QC, Canada</p>
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+// ─── Legal Modal ─────────────────────────────────────────
+(function () {
+  var backdrop = document.getElementById('legal-modal-backdrop');
+  var panel    = document.getElementById('legal-modal-panel');
+  var body     = document.getElementById('legal-modal-body');
+  var closeBtn = document.getElementById('legal-modal-close');
+  var eyebrow  = document.getElementById('legal-modal-eyebrow');
+  var titleEl  = document.getElementById('legal-modal-title');
+  var dateEl   = document.getElementById('legal-modal-date-label');
+
+  var configs = {
+    pc: {
+      eyebrow:   'Document légal · Confidentialité',
+      title:     'Politique de Confidentialité',
+      date:      'Dernière mise à jour : 19 avril 2026',
+      contentId: 'lm-content-pc'
+    },
+    cgu: {
+      eyebrow:   'Document légal · CGU',
+      title:     "Conditions Générales d'Utilisation",
+      date:      'Dernière mise à jour : 19 avril 2026',
+      contentId: 'lm-content-cgu'
+    }
+  };
+
+  window.openLegalModal = function (type) {
+    var cfg = configs[type];
+    if (!cfg) return;
+
+    eyebrow.textContent  = cfg.eyebrow;
+    titleEl.textContent  = cfg.title;
+    dateEl.textContent   = cfg.date;
+    body.innerHTML       = document.getElementById(cfg.contentId).innerHTML;
+    body.scrollTop       = 0;
+
+    /* Wire TOC smooth-scroll inside modal */
+    body.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var target = body.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    backdrop.classList.add('lm-open');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  };
+
+  function closeModal() {
+    backdrop.classList.remove('lm-open');
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+
+  backdrop.addEventListener('click', function (e) {
+    if (e.target === backdrop) closeModal();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && backdrop.classList.contains('lm-open')) closeModal();
+  });
+})();
+</script>
+
+</body>
+</html>

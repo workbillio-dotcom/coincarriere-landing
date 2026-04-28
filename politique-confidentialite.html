@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Politique de Confidentialité — CoinCarrière BTP</title>
+  <meta name="description" content="Politique de Confidentialité de la plateforme CoinCarrière BTP.">
+  <meta name="robots" content="noindex">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#050F1A">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand:       '#0077B6',
+            'brand-dark':'#005a8a',
+            'brand-ink': '#052238',
+            lime:        '#b4dc02',
+            paper:       '#FAFAF7',
+            ink:         '#0A0F1A',
+          },
+          fontFamily: {
+            display: ['Sora','sans-serif'],
+            body:    ['Inter','sans-serif'],
+            mono:    ['JetBrains Mono','monospace'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #FAFAF7; color: #1a2a3a; }
+
+    /* ── Nav ── */
+    .legal-nav {
+      background: #052238;
+      padding: 0 clamp(20px,4vw,60px);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .legal-nav a.back {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .legal-nav a.back:hover { color: rgba(255,255,255,0.8); }
+
+    /* ── Page header ── */
+    .legal-hero {
+      background: #052238;
+      padding: clamp(40px,6vw,80px) clamp(20px,4vw,60px) clamp(32px,5vw,64px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .legal-hero .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #b4dc02;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .legal-hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(26px, 4vw, 44px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .legal-hero .date {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.38);
+    }
+
+    /* ── Content ── */
+    .legal-body {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: clamp(40px,6vw,72px) clamp(20px,4vw,40px);
+    }
+
+    /* Table of contents */
+    .toc {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+    .toc-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #0077B6;
+      margin-bottom: 14px;
+    }
+    .toc ol {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 24px;
+    }
+    @media (max-width: 600px) { .toc ol { grid-template-columns: 1fr; } }
+    .toc li a {
+      font-size: 13px;
+      color: #3a5a7a;
+      text-decoration: none;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .toc li a:hover { color: #0077B6; }
+    .toc li a .toc-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #94a3b8;
+      min-width: 18px;
+    }
+
+    /* Sections */
+    .legal-section {
+      margin-bottom: 48px;
+      padding-top: 8px;
+    }
+    .legal-section h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #052238;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .legal-section h2 .sec-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      color: #0077B6;
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+    }
+    .legal-section h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e3a5a;
+      margin: 20px 0 10px;
+    }
+    .legal-section p {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: #334155;
+      margin-bottom: 12px;
+    }
+    .legal-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 16px;
+    }
+    .legal-section ul li {
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: #334155;
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 6px;
+    }
+    .legal-section ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: #0077B6;
+      font-size: 12px;
+    }
+    .legal-section a {
+      color: #0077B6;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0,119,182,0.25);
+      transition: border-color 0.2s;
+    }
+    .legal-section a:hover { border-color: #0077B6; }
+
+    /* Data tables */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      margin: 16px 0 24px;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+    }
+    .data-table th {
+      background: #052238;
+      color: rgba(255,255,255,0.8);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 11px 16px;
+      text-align: left;
+    }
+    .data-table td {
+      padding: 11px 16px;
+      color: #334155;
+      line-height: 1.5;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:nth-child(even) td { background: #f8fafc; }
+    .data-table td:first-child { color: #1e3a5a; font-weight: 500; }
+
+    /* Notice box */
+    .notice-box {
+      background: #f0f9ff;
+      border-left: 3px solid #0077B6;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+    }
+    .notice-box p { margin-bottom: 0 !important; font-size: 13.5px; }
+
+    /* Contact card */
+    .contact-card {
+      background: #f0f7ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-top: 16px;
+    }
+    .contact-card p { margin-bottom: 4px !important; }
+
+    /* ── Footer ── */
+    .legal-footer {
+      background: #052238;
+      padding: 32px clamp(20px,4vw,60px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    @media (min-width: 640px) {
+      .legal-footer { flex-direction: row; justify-content: space-between; }
+    }
+    .legal-footer-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .legal-footer-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .legal-footer-links a:hover { color: rgba(255,255,255,0.6); }
+    .legal-footer-links a.active { color: rgba(255,255,255,0.5); }
+    .legal-footer-sep { color: rgba(255,255,255,0.15); font-size: 12px; }
+    .legal-copyright {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav class="legal-nav">
+  <a href="index.html" class="back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Retour à l'accueil
+  </a>
+  <img src="logo.png" alt="CoinCarrière" style="height:24px;filter:brightness(0) invert(1);display:block;object-fit:contain;">
+</nav>
+
+<!-- ── Page header ── -->
+<header class="legal-hero">
+  <div style="max-width:780px;margin:0 auto;">
+    <span class="eyebrow">Document légal · Confidentialité</span>
+    <h1>Politique de<br>Confidentialité</h1>
+    <p class="date">Dernière mise à jour : 19 avril 2026</p>
+  </div>
+</header>
+
+<!-- ── Legal content ── -->
+<main class="legal-body">
+
+  <!-- Table of contents -->
+  <div class="toc">
+    <div class="toc-title">Sommaire</div>
+    <ol>
+      <li><a href="#pc1"><span class="toc-num">01</span>Identité du responsable</a></li>
+      <li><a href="#pc2"><span class="toc-num">02</span>Champ d'application</a></li>
+      <li><a href="#pc3"><span class="toc-num">03</span>Renseignements collectés</a></li>
+      <li><a href="#pc4"><span class="toc-num">04</span>Finalités et bases légales</a></li>
+      <li><a href="#pc5"><span class="toc-num">05</span>Partage des renseignements</a></li>
+      <li><a href="#pc6"><span class="toc-num">06</span>Transferts hors Québec</a></li>
+      <li><a href="#pc7"><span class="toc-num">07</span>Conservation des données</a></li>
+      <li><a href="#pc8"><span class="toc-num">08</span>Témoins (cookies)</a></li>
+      <li><a href="#pc9"><span class="toc-num">09</span>Vos droits</a></li>
+      <li><a href="#pc10"><span class="toc-num">10</span>Sécurité</a></li>
+      <li><a href="#pc11"><span class="toc-num">11</span>Protection des mineurs</a></li>
+      <li><a href="#pc12"><span class="toc-num">12</span>Incident de confidentialité</a></li>
+      <li><a href="#pc13"><span class="toc-num">13</span>Modifications</a></li>
+      <li><a href="#pc14"><span class="toc-num">14</span>Contact</a></li>
+    </ol>
+  </div>
+
+  <!-- Section 1 -->
+  <div class="legal-section" id="pc1">
+    <h2><span class="sec-num">Art. 1</span> Identité du responsable du traitement</h2>
+    <p>Le site <a href="https://coincarriere.com" target="_blank" rel="noopener">coincarriere.com</a> (ci-après « CoinCarrière » ou « la Plateforme ») est exploité par :</p>
+    <div class="contact-card">
+      <p><strong>Raison sociale :</strong> 9558-9321 Québec inc., faisant affaire sous le nom CoinCarrière</p>
+      <p><strong>NEQ :</strong> 1181724304</p>
+      <p><strong>Siège social :</strong> Québec, QC, Canada</p>
+      <p><strong>Courriel :</strong> <a href="mailto:contact@coincarriere.com">contact@coincarriere.com</a></p>
+      <p><strong>Site web :</strong> <a href="https://coincarriere.com" target="_blank" rel="noopener">https://coincarriere.com</a></p>
+    </div>
+    <p style="margin-top:14px;">Le responsable de la protection des renseignements personnels est le plus haut dirigeant de l'entreprise, joignable à l'adresse ci-dessus.</p>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="legal-section" id="pc2">
+    <h2><span class="sec-num">Art. 2</span> Champ d'application</h2>
+    <p>La présente politique s'applique à tous les utilisateurs de la Plateforme, qu'ils soient candidats, recruteurs, employeurs ou simples visiteurs, et ce, quel que soit leur lieu de résidence. Elle couvre l'ensemble des renseignements personnels collectés via le site web, les formulaires, le dépôt de CV, la création de compte et l'utilisation des services de recrutement.</p>
+    <p>CoinCarrière se conforme aux lois applicables en matière de protection des renseignements personnels, notamment :</p>
+    <ul>
+      <li>La Loi sur la protection des renseignements personnels dans le secteur privé du Québec (RLRQ, c. P-39.1), telle que modernisée par la Loi 25</li>
+      <li>La Loi sur la protection des renseignements personnels et les documents électroniques (LPRPDE) du Canada</li>
+      <li>Le Règlement général sur la protection des données (RGPD) de l'Union européenne, pour les utilisateurs situés dans l'Espace économique européen</li>
+      <li>La Loi n° 09-08 relative à la protection des personnes physiques à l'égard du traitement des données à caractère personnel du Maroc, pour les utilisateurs situés au Maroc</li>
+    </ul>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="legal-section" id="pc3">
+    <h2><span class="sec-num">Art. 3</span> Renseignements personnels collectés</h2>
+    <h3>3.1 Renseignements fournis directement par l'utilisateur</h3>
+    <ul>
+      <li><strong>Identification :</strong> prénom, nom, adresse courriel, numéro de téléphone</li>
+      <li><strong>Informations professionnelles :</strong> curriculum vitae (CV), lettre de motivation, expérience professionnelle, formation, compétences, certifications</li>
+      <li><strong>Informations de profil :</strong> ville, pays, lien LinkedIn, site web personnel</li>
+      <li><strong>Informations de compte :</strong> identifiants de connexion, mot de passe (chiffré), préférences de notification</li>
+      <li><strong>Correspondances :</strong> messages échangés via la Plateforme, réponses aux formulaires de candidature</li>
+    </ul>
+    <h3>3.2 Renseignements collectés automatiquement</h3>
+    <ul>
+      <li><strong>Données techniques :</strong> adresse IP, type et version du navigateur, système d'exploitation, résolution d'écran</li>
+      <li><strong>Données de navigation :</strong> pages consultées, durée des visites, pages de renvoi, parcours de navigation</li>
+      <li><strong>Témoins (cookies) :</strong> témoins de session, témoins analytiques, témoins publicitaires (voir section 8)</li>
+      <li><strong>Données de localisation :</strong> pays et région déduits de l'adresse IP</li>
+    </ul>
+    <h3>3.3 Renseignements reçus de tiers</h3>
+    <ul>
+      <li>Informations transmises par un employeur ou recruteur qui crée un profil candidat dans le cadre d'un processus de recrutement</li>
+      <li>Informations provenant de sources publiques (offres d'emploi publiées sur des sites tiers)</li>
+    </ul>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="legal-section" id="pc4">
+    <h2><span class="sec-num">Art. 4</span> Finalités et bases légales du traitement</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Finalité</th>
+          <th>Base légale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Fournir les services de recrutement (mise en relation candidats-employeurs)</td><td>Exécution du contrat</td></tr>
+        <tr><td>Créer et gérer les comptes utilisateurs</td><td>Exécution du contrat</td></tr>
+        <tr><td>Permettre le dépôt et la consultation de CV</td><td>Consentement</td></tr>
+        <tr><td>Transmettre les candidatures aux employeurs</td><td>Consentement</td></tr>
+        <tr><td>Envoyer des notifications relatives aux candidatures (étape, entretien, offre)</td><td>Exécution du contrat</td></tr>
+        <tr><td>Envoyer des communications marketing et newsletters</td><td>Consentement</td></tr>
+        <tr><td>Améliorer la Plateforme et analyser son utilisation</td><td>Intérêt légitime</td></tr>
+        <tr><td>Prévenir la fraude et assurer la sécurité</td><td>Intérêt légitime</td></tr>
+        <tr><td>Respecter les obligations légales et réglementaires</td><td>Obligation légale</td></tr>
+        <tr><td>Répondre aux demandes et au support</td><td>Intérêt légitime</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="legal-section" id="pc5">
+    <h2><span class="sec-num">Art. 5</span> Partage et communication des renseignements</h2>
+    <h3>5.1 Employeurs et recruteurs</h3>
+    <p>Lorsque vous postulez à une offre d'emploi ou déposez votre CV, vos informations professionnelles (CV, coordonnées, expérience) sont transmises aux employeurs concernés afin de traiter votre candidature. Les employeurs sont tenus de respecter la confidentialité de ces informations.</p>
+    <h3>5.2 Sous-traitants et fournisseurs de services</h3>
+    <ul>
+      <li><strong>Cloudflare, Inc.</strong> (San Francisco, USA) — hébergement, stockage des fichiers (R2), base de données (D1), réseau de diffusion de contenu (CDN)</li>
+      <li><strong>Google LLC</strong> (USA) — Google Analytics (analyse de trafic), Google Ads (publicité)</li>
+      <li><strong>Meta Platforms, Inc.</strong> (USA) — Facebook Ads (publicité)</li>
+      <li><strong>Amazon Web Services</strong> (USA) — envoi de courriels transactionnels (SES)</li>
+    </ul>
+    <p>Ces sous-traitants n'utilisent vos données que dans le cadre des services qu'ils nous fournissent et sont liés par des obligations contractuelles de confidentialité.</p>
+    <h3>5.3 Autorités légales</h3>
+    <p>Nous pouvons communiquer vos renseignements aux autorités compétentes lorsque la loi l'exige, dans le cadre d'une procédure judiciaire, ou pour protéger nos droits légaux.</p>
+    <h3>5.4 Ce que nous ne faisons pas</h3>
+    <div class="notice-box">
+      <p>Nous ne vendons jamais vos renseignements personnels à des tiers. Nous ne louons pas, n'échangeons pas et ne monétisons pas vos données personnelles.</p>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="legal-section" id="pc6">
+    <h2><span class="sec-num">Art. 6</span> Transferts hors du Québec et du Canada</h2>
+    <p>Certains de nos sous-traitants sont situés aux États-Unis (Cloudflare, Google, Meta, AWS). Vos renseignements personnels peuvent donc être transférés et traités en dehors du Québec et du Canada.</p>
+    <p>Conformément à la Loi 25, avant tout transfert, nous réalisons une évaluation des facteurs relatifs à la vie privée (EFVP) pour nous assurer que les renseignements bénéficieront d'une protection adéquate. Ces transferts sont encadrés par des clauses contractuelles appropriées.</p>
+    <p>Pour les utilisateurs situés dans l'Union européenne, ces transferts sont effectués sur la base de clauses contractuelles types approuvées par la Commission européenne ou de toute autre garantie prévue par le RGPD.</p>
+  </div>
+
+  <!-- Section 7 -->
+  <div class="legal-section" id="pc7">
+    <h2><span class="sec-num">Art. 7</span> Conservation des renseignements</h2>
+    <p>Nous conservons vos renseignements personnels selon les durées suivantes :</p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Type de données</th>
+          <th>Durée de conservation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Curriculum vitae (CV) déposés</td><td>5 ans à compter du dépôt ou de la dernière mise à jour</td></tr>
+        <tr><td>Comptes candidats</td><td>5 ans après la dernière connexion</td></tr>
+        <tr><td>Comptes employeurs / recruteurs</td><td>Durée de la relation contractuelle + 3 ans</td></tr>
+        <tr><td>Données de candidature</td><td>5 ans après la clôture du poste</td></tr>
+        <tr><td>Journaux d'audit</td><td>3 ans</td></tr>
+        <tr><td>Données analytiques (anonymisées)</td><td>26 mois</td></tr>
+        <tr><td>Correspondances / messages</td><td>5 ans</td></tr>
+      </tbody>
+    </table>
+    <p>À l'expiration de ces délais, les renseignements sont supprimés ou anonymisés de manière irréversible. Vous pouvez demander la suppression anticipée de vos données à tout moment (voir section 9).</p>
+  </div>
+
+  <!-- Section 8 -->
+  <div class="legal-section" id="pc8">
+    <h2><span class="sec-num">Art. 8</span> Témoins (cookies) et technologies de suivi</h2>
+    <h3>8.1 Catégories de témoins utilisés</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Catégorie</th>
+          <th>Finalité</th>
+          <th>Durée</th>
+          <th>Fournisseur</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Essentiels</td><td>Authentification, sécurité, fonctionnement du site</td><td>Session / 7 jours</td><td>CoinCarrière</td></tr>
+        <tr><td>Analytiques</td><td>Mesure d'audience, amélioration du service</td><td>26 mois</td><td>Google Analytics</td></tr>
+        <tr><td>Publicitaires</td><td>Publicités personnalisées, mesure de performance</td><td>90 jours</td><td>Google Ads, Meta Ads</td></tr>
+      </tbody>
+    </table>
+    <h3>8.2 Gestion des témoins</h3>
+    <p>Vous pouvez à tout moment modifier vos préférences en matière de témoins :</p>
+    <ul>
+      <li>Via les paramètres de votre navigateur (bloquer ou supprimer les témoins)</li>
+      <li>Via les outils de désactivation de Google Analytics</li>
+      <li>Via les paramètres publicitaires de votre compte Google ou Facebook</li>
+    </ul>
+    <p>Le refus des témoins essentiels peut affecter le fonctionnement de la Plateforme.</p>
+  </div>
+
+  <!-- Section 9 -->
+  <div class="legal-section" id="pc9">
+    <h2><span class="sec-num">Art. 9</span> Vos droits</h2>
+    <h3>Pour tous les utilisateurs (Loi 25 / LPRPDE)</h3>
+    <ul>
+      <li><strong>Droit d'accès :</strong> obtenir la confirmation que nous détenons des renseignements vous concernant et en recevoir une copie</li>
+      <li><strong>Droit de rectification :</strong> faire corriger des renseignements inexacts, incomplets ou équivoques</li>
+      <li><strong>Droit de suppression :</strong> demander la suppression de vos renseignements lorsqu'ils ne sont plus nécessaires</li>
+      <li><strong>Droit de retirer votre consentement :</strong> retirer à tout moment un consentement préalablement donné</li>
+      <li><strong>Droit à la désindexation :</strong> demander la cessation de la diffusion de vos renseignements (déréférencement)</li>
+      <li><strong>Droit à la portabilité :</strong> recevoir vos renseignements dans un format technologique structuré et couramment utilisé</li>
+    </ul>
+    <h3>Droits additionnels pour les utilisateurs dans l'UE/EEE (RGPD)</h3>
+    <ul>
+      <li><strong>Droit d'opposition :</strong> vous opposer au traitement fondé sur l'intérêt légitime</li>
+      <li><strong>Droit à la limitation :</strong> demander la restriction du traitement dans certains cas</li>
+      <li><strong>Droit d'introduire une réclamation :</strong> auprès de l'autorité de contrôle compétente (ex. : CNIL en France)</li>
+    </ul>
+    <h3>Droits additionnels pour les utilisateurs au Maroc (Loi 09-08)</h3>
+    <ul>
+      <li><strong>Droit d'opposition :</strong> vous opposer, pour des motifs légitimes, au traitement de vos données</li>
+      <li><strong>Droit d'introduire une réclamation :</strong> auprès de la Commission Nationale de contrôle de la protection des Données à caractère Personnel (CNDP)</li>
+    </ul>
+    <h3>Comment exercer vos droits</h3>
+    <div class="notice-box">
+      <p>Envoyez votre demande à <a href="mailto:contact@coincarriere.com">contact@coincarriere.com</a> en précisant votre nom, votre adresse courriel et le droit que vous souhaitez exercer. Nous répondrons dans un délai de 30 jours.</p>
+    </div>
+  </div>
+
+  <!-- Section 10 -->
+  <div class="legal-section" id="pc10">
+    <h2><span class="sec-num">Art. 10</span> Sécurité des renseignements</h2>
+    <p>Nous mettons en œuvre des mesures de sécurité techniques et organisationnelles appropriées pour protéger vos renseignements personnels, notamment :</p>
+    <ul>
+      <li>Chiffrement des mots de passe (hachage irréversible)</li>
+      <li>Chiffrement des communications (HTTPS/TLS)</li>
+      <li>Authentification par jetons sécurisés (JWT) avec expiration</li>
+      <li>Isolation des données par organisation (architecture multi-tenant)</li>
+      <li>Contrôle d'accès basé sur les rôles (RBAC)</li>
+      <li>Journaux d'audit sur toutes les opérations sensibles</li>
+      <li>Limitation du débit des requêtes (rate limiting)</li>
+      <li>Sauvegardes régulières des données</li>
+    </ul>
+    <p>Malgré ces mesures, aucune méthode de transmission ou de stockage électronique n'est totalement sécurisée. En cas d'incident de confidentialité, nous vous en aviserons conformément aux lois applicables.</p>
+  </div>
+
+  <!-- Section 11 -->
+  <div class="legal-section" id="pc11">
+    <h2><span class="sec-num">Art. 11</span> Protection des mineurs</h2>
+    <p>La Plateforme est destinée aux personnes âgées de 16 ans et plus. Nous ne collectons pas sciemment de renseignements personnels auprès de personnes de moins de 16 ans. Si nous apprenons que nous avons collecté des renseignements d'un mineur, nous les supprimerons dans les plus brefs délais.</p>
+  </div>
+
+  <!-- Section 12 -->
+  <div class="legal-section" id="pc12">
+    <h2><span class="sec-num">Art. 12</span> Incident de confidentialité</h2>
+    <p>Conformément à la Loi 25, en cas d'incident de confidentialité présentant un risque de préjudice sérieux, nous :</p>
+    <ul>
+      <li>Prendrons les mesures raisonnables pour diminuer les risques et prévenir de nouveaux incidents</li>
+      <li>Aviserons la Commission d'accès à l'information du Québec (CAI)</li>
+      <li>Aviserons les personnes concernées</li>
+      <li>Tiendrons un registre de l'incident</li>
+    </ul>
+  </div>
+
+  <!-- Section 13 -->
+  <div class="legal-section" id="pc13">
+    <h2><span class="sec-num">Art. 13</span> Modifications de cette politique</h2>
+    <p>Nous pouvons mettre à jour cette politique de confidentialité périodiquement. En cas de modification substantielle, nous vous en informerons par courriel ou par un avis bien visible sur la Plateforme. La date de dernière mise à jour est indiquée en haut de cette page.</p>
+  </div>
+
+  <!-- Section 14 -->
+  <div class="legal-section" id="pc14">
+    <h2><span class="sec-num">Art. 14</span> Contact</h2>
+    <p>Pour toute question relative à cette politique ou pour exercer vos droits :</p>
+    <div class="contact-card">
+      <p><strong>Courriel :</strong> <a href="mailto:contact@coincarriere.com">contact@coincarriere.com</a></p>
+      <p><strong>Entreprise :</strong> 9558-9321 Québec inc. (CoinCarrière)</p>
+      <p><strong>Siège social :</strong> Québec, QC, Canada</p>
+    </div>
+    <h3 style="margin-top:24px;">Autorités de contrôle</h3>
+    <p>Si vous estimez que vos droits n'ont pas été respectés, vous pouvez déposer une plainte auprès de :</p>
+    <ul>
+      <li><strong>Québec :</strong> Commission d'accès à l'information du Québec (CAI) — <a href="https://www.cai.gouv.qc.ca" target="_blank" rel="noopener">cai.gouv.qc.ca</a></li>
+      <li><strong>Canada :</strong> Commissariat à la protection de la vie privée du Canada — <a href="https://www.priv.gc.ca" target="_blank" rel="noopener">priv.gc.ca</a></li>
+      <li><strong>Union européenne :</strong> l'autorité de contrôle de votre pays de résidence</li>
+      <li><strong>Maroc :</strong> Commission Nationale de contrôle de la protection des Données à caractère Personnel (CNDP) — <a href="https://www.cndp.ma" target="_blank" rel="noopener">cndp.ma</a></li>
+    </ul>
+  </div>
+
+</main>
+
+<!-- ── Footer ── -->
+<footer class="legal-footer">
+  <img src="logo.png" alt="CoinCarrière" style="height:24px;filter:brightness(0) invert(1);display:block;object-fit:contain;">
+  <div class="legal-footer-links">
+    <a href="politique-confidentialite.html" class="active">Politique de Confidentialité</a>
+    <span class="legal-footer-sep">·</span>
+    <a href="cgu.html">CGU</a>
+    <span class="legal-footer-sep">·</span>
+    <a href="mailto:contact@coincarriere.com">Contact</a>
+  </div>
+  <span class="legal-copyright">© 2026 CoinCarrière</span>
+</footer>
+
+</body>
+</html>
