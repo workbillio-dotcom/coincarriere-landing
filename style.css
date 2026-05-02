@@ -1032,18 +1032,18 @@ section:first-of-type .lime-stroke { color: #0A0F1A !important; }
     min-width: 0;
   }
   .trust-stats-grid > div:last-child { margin-right: 0 !important; }
-  /* Swipe hint label */
+  /* Swipe hint label — inline at scroll end, no trailing blank space */
   .trust-stats-grid::after {
     content: '← glissez →';
-    display: block;
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
     font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
     letter-spacing: 0.12em;
     color: rgba(10,15,26,0.35);
-    text-align: center;
-    flex: 0 0 100%;
-    align-self: flex-end;
-    padding: 6px 0 0;
+    white-space: nowrap;
+    padding: 0 20px 0 8px;
   }
 }
 
