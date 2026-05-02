@@ -8,63 +8,65 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#050F1A">
 
-  <!-- Meta Pixel -->
+  <!-- Meta Pixel — stub only; fbevents.js deferred to after page load -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window,document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
+    n.queue=[]}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq('init','930343703335985');
     fbq('track','PageView');
+  </script>
+  <script>
+    window.addEventListener('load',function(){
+      var t=document.createElement('script');
+      t.src='https://connect.facebook.net/en_US/fbevents.js';
+      t.async=true;document.head.appendChild(t);
+    },{once:true});
   </script>
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=930343703335985&ev=PageView&noscript=1"/></noscript>
 
-  <!-- Fonts -->
+  <!-- Fonts: preconnect + reduced weights + non-blocking load -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400&display=swap"></noscript>
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand:       '#0077B6',
-            'brand-dark':'#005a8a',
-            'brand-ink': '#052238',
-            lime:        '#b4dc02',
-            'lime-dark': '#9bbf00',
-            paper:       '#FAFAF7',
-            ink:         '#0A0F1A',
-          },
-          fontFamily: {
-            display: ['Sora','sans-serif'],
-            body:    ['Inter','sans-serif'],
-            mono:    ['JetBrains Mono','monospace'],
-          },
-        }
-      }
-    }
-  </script>
-
-  <!-- Design system -->
-  <link rel="stylesheet" href="style.css">
+  <!-- Styles: purged Tailwind (15KB) + design system (minified) -->
+  <link rel="stylesheet" href="tailwind.css">
+  <link rel="stylesheet" href="style.min.css">
 </head>
 
 <body>
+
+<!-- ═══════════════════════════════════════════════
+     STICKY HEADER — Smart Conversion Bar
+═══════════════════════════════════════════════ -->
+<header id="sticky-header" aria-hidden="true" aria-label="Navigation secondaire">
+  <div class="sh-inner">
+    <div class="sh-logo">
+      <img src="logo.webp" alt="CoinCarrière" class="sh-logo-img" width="95" height="30">
+    </div>
+    <a href="https://coincarriere.com/register?type=company"
+       target="_blank" rel="noopener"
+       onclick="if(window.fbq)fbq('track','Lead')"
+       class="btn-primary sh-cta">
+      <span>Publier votre première offre</span>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </a>
+  </div>
+</header>
 
 <!-- ═══════════════════════════════════════════════
      01 / HERO — FULL-BG VIDEO · LEFT TEXT
@@ -72,13 +74,13 @@
 <section id="hero-section" style="position:relative;min-height:100vh;overflow:hidden;background:#050F1A;">
 
   <!-- ① VIDEO — desktop (hidden on mobile) -->
-  <video class="hero-video-desktop" style="position:absolute;top:0;left:unset;bottom:0;right:-100px;width:calc(100% + 100px);height:100%;object-fit:cover;object-position:right center;pointer-events:none;z-index:0;" autoplay muted loop playsinline>
-    <source src="hero-bg.mp4" type="video/mp4">
+  <video id="hero-video-desktop" class="hero-video-desktop" style="position:absolute;top:0;left:unset;bottom:0;right:-100px;width:calc(100% + 100px);height:100%;object-fit:cover;object-position:right center;pointer-events:none;z-index:0;" autoplay muted loop playsinline preload="none">
+    <source data-src="hero-bg.mp4" type="video/mp4">
   </video>
 
   <!-- ① VIDEO — mobile (hidden on desktop) -->
-  <video class="hero-video-mobile" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:cover;object-position:center center;pointer-events:none;z-index:0;" autoplay muted loop playsinline>
-    <source src="hero-bg-mobile.mp4" type="video/mp4">
+  <video id="hero-video-mobile" class="hero-video-mobile" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:cover;object-position:center center;pointer-events:none;z-index:0;" autoplay muted loop playsinline preload="none">
+    <source data-src="hero-bg-mobile.mp4" type="video/mp4">
   </video>
 
   <!-- ② CINEMATIC GRADIENT — dark-left → transparent-right (6 stops) -->
@@ -107,6 +109,7 @@
   <!-- ④c MOBILE SCRIM — bottom-up dark fade, replaces left gradient on mobile -->
   <div class="hero-mobile-scrim" aria-hidden="true"></div>
 
+
   <!-- ⑤ INTERACTIVE BLUEPRINT CANVAS — replaces static grid -->
   <canvas id="blueprint-canvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;display:block;" aria-hidden="true"></canvas>
 
@@ -123,11 +126,11 @@
   <div style="position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column;">
 
     <!-- NAV -->
-    <nav style="flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,4vw,60px);height:70px;">
-      <div style="background:rgba(255,255,255,0.93);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:12px;padding:8px 18px;border:1px solid rgba(255,255,255,0.5);">
-        <img src="logo.png" alt="CoinCarrière" style="height:42px;display:block;object-fit:contain;">
+    <nav class="hero-nav" style="flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,4vw,60px);height:70px;">
+      <div class="nav-logo-wrap" style="background:rgba(255,255,255,0.93);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:12px;padding:8px 18px;border:1px solid rgba(255,255,255,0.5);">
+        <img src="logo.webp" alt="CoinCarrière" class="nav-logo-img" width="188" height="60" style="height:42px;display:block;object-fit:contain;">
       </div>
-      <div style="display:flex;align-items:center;gap:10px;">
+      <div class="hero-nav-badge" style="display:flex;align-items:center;gap:10px;">
         <span class="pulse-dot"></span>
         <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;color:rgba(255,255,255,0.4);text-transform:uppercase;">Maroc · BTP · 2026</span>
       </div>
@@ -170,23 +173,26 @@
             <a href="https://coincarriere.com/register?type=company" target="_blank" rel="noopener"
                onclick="fbq('track','Lead')"
                class="btn-primary inline-flex items-center gap-3"
-               style="padding:13px 28px;border-radius:13px;font-size:15px;font-weight:700;letter-spacing:-0.015em;display:inline-flex;box-shadow:0 0 48px rgba(180,220,2,0.22),0 8px 32px rgba(0,0,0,0.35);">
-              <span>Publier mon offre</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+               style="padding:17px 38px;border-radius:14px;font-size:17px;font-weight:700;letter-spacing:-0.015em;display:inline-flex;box-shadow:0 0 56px rgba(180,220,2,0.26),0 10px 36px rgba(0,0,0,0.38);">
+              <span>Publier votre première offre</span>
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </a>
           </div>
 
-          <!-- Social proof pill -->
-          <div class="hero-fade d5 hero-mobile-optional" style="display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:10px;background:rgba(242,247,252,0.04);border:1px solid rgba(255,255,255,0.08);margin-bottom:12px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#b4dc02" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(242,247,252,0.4);white-space:nowrap;">Utilisé par des recruteurs professionnels</span>
-          </div>
-
-          <!-- Reassurance -->
-          <div class="hero-fade d6 hero-mobile-optional" style="display:flex;flex-wrap:wrap;gap:8px 16px;">
-            <span class="reassurance-item">Gratuit pour commencer</span>
-            <span class="reassurance-item">Aucune carte bancaire</span>
-            <span class="reassurance-item">En ligne en 5 min</span>
+          <!-- Trust block -->
+          <div class="hero-fade d5 hero-mobile-optional trust-block trust-block--dark">
+            <span class="trust-item">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Gratuit pour commencer
+            </span>
+            <span class="trust-item">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Sans engagement
+            </span>
+            <span class="trust-item">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              Aucune carte bancaire
+            </span>
           </div>
 
         </div><!-- /hero-bottom-group -->
@@ -207,21 +213,21 @@
   <div style="overflow:hidden;mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%);">
     <div style="display:flex;">
       <div class="marquee">
-        <img src="logos/batifer.jpg"              alt="Batifer"               style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
-        <img src="logos/sogea-maroc.png"          alt="Sogea Maroc"           style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/batifer.webp"              alt="Batifer"               style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/sogea-maroc.webp"          alt="Sogea Maroc"           style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
         <img src="logos/saint-gobain.png"         alt="Saint-Gobain"          style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
         <img src="logos/plastima.webp"            alt="Plastima Canalisations" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
-        <img src="logos/tectra.png"               alt="Tectra"                style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/tectra.webp"               alt="Tectra"                style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
         <img src="logos/cpsq-consulting.webp"     alt="CPSQ Consulting"       style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
-        <img src="logos/profils-recrutement.png"  alt="Profils Recrutement"   style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/profils-recrutement.webp"  alt="Profils Recrutement"   style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
         <!-- Duplicate for seamless loop -->
-        <img src="logos/batifer.jpg"              alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
-        <img src="logos/sogea-maroc.png"          alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/batifer.webp"              alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/sogea-maroc.webp"          alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
         <img src="logos/saint-gobain.png"         alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
         <img src="logos/plastima.webp"            alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
-        <img src="logos/tectra.png"               alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/tectra.webp"               alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
         <img src="logos/cpsq-consulting.webp"     alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
-        <img src="logos/profils-recrutement.png"  alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
+        <img src="logos/profils-recrutement.webp"  alt="" aria-hidden="true" style="height:42px;opacity:0.55;filter:grayscale(1);object-fit:contain;flex-shrink:0;">
       </div>
     </div>
   </div>
@@ -515,7 +521,7 @@
                style="background:#0077B6;box-shadow:0 0 0 8px rgba(0,119,182,0.12),0 8px 28px rgba(0,119,182,0.45);">
             <span class="display text-white" style="font-size:22px;letter-spacing:-0.04em;font-weight:700;">03</span>
           </div>
-          <div class="w-full rounded-2xl p-6 transition-all duration-300 group-hover:-translate-y-2"
+          <div class="w-full flex-1 flex flex-col rounded-2xl p-6 transition-all duration-300 group-hover:-translate-y-2"
                style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);backdrop-filter:blur(12px);">
             <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:rgba(0,119,182,0.22);">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7EC8E3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -523,8 +529,8 @@
               </svg>
             </div>
             <h3 class="display text-white mb-3" style="font-size:18px;">Évaluez et planifiez</h3>
-            <p class="text-white/50 leading-relaxed mb-5" style="font-size:13px;">Comparez, notez, planifiez vos entretiens, tout au même endroit.</p>
-            <span class="inline-flex items-center gap-1.5 font-mono px-3 py-1.5 rounded-full" style="font-size:10px;background:rgba(0,119,182,0.2);color:#7EC8E3;letter-spacing:0.08em;">📋 CENTRALISÉ</span>
+            <p class="text-white/50 leading-relaxed mb-5 flex-1" style="font-size:13px;">Comparez, notez, planifiez vos entretiens depuis un seul espace centralisé. Aucun suivi par email, tout est dans la plateforme.</p>
+            <span class="inline-flex items-center justify-center gap-1.5 font-mono px-3 py-1.5 rounded-full mt-auto" style="font-size:10px;background:rgba(0,119,182,0.2);color:#7EC8E3;letter-spacing:0.08em;">📋 CENTRALISÉ</span>
           </div>
         </div>
 
@@ -788,9 +794,11 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           </div>
           <h3 class="display text-xl text-brand-ink mb-2">Analytics</h3>
-          <p class="text-sm text-brand-ink/70 leading-relaxed mb-4">Temps d'embauche, sources efficaces, taux de conversion. Mesurez et optimisez votre recrutement.</p>
-          <!-- Mini metric chips -->
-          <div class="flex flex-col gap-2">
+          <p class="text-sm text-brand-ink/70 leading-relaxed analytics-desc">Temps d'embauche, sources efficaces, taux de conversion. Mesurez et optimisez votre recrutement.</p>
+          <!-- Metric chips + source breakdown — hidden on mobile via .analytics-extras -->
+          <div class="analytics-extras">
+          <!-- Metric chips -->
+          <div class="flex flex-col gap-2 mt-4">
             <div class="flex items-center justify-between rounded-lg px-3 py-2 border border-ink/8" style="background:#F7F9FB;">
               <span class="text-[11px] text-brand-ink/50 font-mono">Temps moyen d'embauche</span>
               <span class="text-[11px] font-semibold text-brand">6 jours</span>
@@ -799,7 +807,39 @@
               <span class="text-[11px] text-brand-ink/50 font-mono">Taux de conversion</span>
               <span class="text-[11px] font-semibold" style="color:#3D5600;">+34%</span>
             </div>
+            <div class="flex items-center justify-between rounded-lg px-3 py-2 border border-ink/8" style="background:#F7F9FB;">
+              <span class="text-[11px] text-brand-ink/50 font-mono">Candidatures / offre</span>
+              <span class="text-[11px] font-semibold text-brand-ink">×8.4</span>
+            </div>
           </div>
+          <!-- Source breakdown -->
+          <div class="mt-4 pt-4 border-t border-ink/8">
+            <div class="text-[9px] font-mono text-brand-ink/40 uppercase tracking-wider mb-2.5">Sources des candidatures</div>
+            <div class="space-y-2">
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono text-brand-ink/50 w-[72px] flex-shrink-0">CoinCarrière</span>
+                <div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background:rgba(10,15,26,0.07);">
+                  <div class="h-full rounded-full" style="width:72%;background:#b4dc02;"></div>
+                </div>
+                <span class="text-[10px] font-mono text-brand-ink/50 w-7 text-right">72%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono text-brand-ink/50 w-[72px] flex-shrink-0">LinkedIn</span>
+                <div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background:rgba(10,15,26,0.07);">
+                  <div class="h-full rounded-full" style="width:18%;background:#0077B6;"></div>
+                </div>
+                <span class="text-[10px] font-mono text-brand-ink/50 w-7 text-right">18%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono text-brand-ink/50 w-[72px] flex-shrink-0">Autres</span>
+                <div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background:rgba(10,15,26,0.07);">
+                  <div class="h-full rounded-full" style="width:10%;background:rgba(10,15,26,0.22);"></div>
+                </div>
+                <span class="text-[10px] font-mono text-brand-ink/50 w-7 text-right">10%</span>
+              </div>
+            </div>
+          </div>
+          </div><!-- /analytics-extras -->
         </div>
 
         <!-- Card 3 — Entretiens intégrés -->
@@ -886,15 +926,17 @@
     <!-- Video container — interactive player -->
     <div id="section-video-wrap" class="fade-up d2 video-player-wrap corner-marks">
 
-      <!-- ① Video — no autoplay, first frame as preview via preload -->
+      <!-- ① Video — src injected on first play to save mobile bandwidth -->
       <video id="section-video"
-        src="demo.webm"
-        preload="metadata"
+        data-src="demo.webm"
+        preload="none"
         playsinline>
       </video>
 
       <!-- ② Preview overlay (fades out on play) -->
       <div class="vp-overlay" aria-hidden="true">
+        <!-- Poster: first frame extracted by JS — sits behind gradient -->
+        <img class="vp-poster" aria-hidden="true" alt="" draggable="false">
         <div class="vp-gradient"></div>
         <div class="vp-grid-tex"></div>
         <div class="vp-tag">16:9 · HD</div>
@@ -938,9 +980,16 @@
 
       </button>
 
-      <!-- ④ Thin progress bar — appears once video starts -->
-      <div class="vp-progress-wrap" aria-hidden="true">
-        <div id="vp-progress-fill" class="vp-progress-fill"></div>
+      <!-- ④ Seekable progress bar — appears once video starts -->
+      <div class="vp-progress-wrap" id="vp-seek-bar" role="slider" tabindex="0"
+           aria-label="Progression vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="vp-seek-hit"></div>
+        <div class="vp-progress-track">
+          <div id="vp-buffer-fill"   class="vp-buffer-fill"></div>
+          <div id="vp-progress-fill" class="vp-progress-fill"></div>
+          <div id="vp-seek-handle"   class="vp-seek-handle"></div>
+        </div>
+        <div id="vp-time-tooltip" class="vp-time-tooltip">0:00</div>
       </div>
 
     </div>
@@ -976,15 +1025,30 @@
     <div class="fade-up d3 flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
       <a href="https://coincarriere.com/register?type=company" target="_blank" rel="noopener"
          onclick="fbq('track','Lead')"
-         class="btn-primary inline-flex items-center justify-center gap-2 px-10 py-5 rounded-xl text-xl min-h-[64px] w-full sm:w-auto">
+         class="btn-primary cta-final inline-flex items-center justify-center gap-2 px-10 py-5 rounded-xl text-xl min-h-[64px] w-full sm:w-auto">
         <span>Publier votre annonce maintenant</span>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <svg class="cta-final-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       </a>
     </div>
 
-    <p class="fade-up d4 eyebrow text-brand-ink/50 flex justify-center flex-wrap gap-x-4 gap-y-1">
-      <span>Gratuit pour commencer. Aucun engagement pour publier votre première annonce.</span>
-    </p>
+    <div class="fade-up d4 trust-block trust-block--light trust-block--centered">
+      <span class="trust-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        Gratuit pour commencer
+      </span>
+      <span class="trust-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Sans engagement
+      </span>
+      <span class="trust-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Aucune carte bancaire
+      </span>
+      <span class="trust-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        En ligne en 5 min
+      </span>
+    </div>
 
   </div>
 </section>
@@ -1045,7 +1109,7 @@
          target="_blank" rel="noopener"
          onclick="if(window.fbq)fbq('track','Lead')">
         <span>Publier ma première offre BTP</span>
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       </a>
 
       <!-- Reassurance -->
@@ -1105,7 +1169,7 @@
            onclick="if(window.fbq)fbq('track','Lead')">
           Publier ma première offre
           <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-            <path d="M1 6h10M7 2.5l3.5 3.5L7 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </a>
         <p class="scta-sub">Sans engagement · En ligne en 5 min</p>
@@ -1114,7 +1178,7 @@
     </div>
   </aside>
 
-<script src="script.js" defer></script>
+<script src="script.min.js" defer></script>
 
 
 <!-- ═══════════════════════════════════════════════
@@ -1607,6 +1671,11 @@
         var target = body.querySelector(this.getAttribute('href'));
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
+    });
+
+    /* Block external navigation — links stay readable, don't exit the page */
+    body.querySelectorAll('a:not([href^="#"])').forEach(function (link) {
+      link.addEventListener('click', function (e) { e.preventDefault(); });
     });
 
     backdrop.classList.add('lm-open');

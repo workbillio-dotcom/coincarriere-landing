@@ -180,6 +180,7 @@ function animateCount(el, target, prefix, suffix, duration) {
     'scta-brief',
     'scta-full',
     'scta-intent',
+    'scta-hidden',
   ];
 
   let current    = 'scta-dormant';
@@ -198,11 +199,11 @@ function animateCount(el, target, prefix, suffix, duration) {
   }
 
   function resolveState(r, t) {
-    if (t < 1.8 || r < 0.08)  return 'scta-dormant';
-    if (r < 0.22)              return 'scta-trace';
-    if (r < 0.40)              return 'scta-seed';
-    if (r < 0.58)              return 'scta-brief';
-    // Full → Intent based on additional signals
+    if (r > 0.88)              return 'scta-hidden';   // near footer — fade out
+    if (t < 2.5 || r < 0.20)  return 'scta-dormant';  // wait past hero
+    if (r < 0.32)              return 'scta-trace';
+    if (r < 0.48)              return 'scta-seed';
+    if (r < 0.64)              return 'scta-brief';
     const isIntent = nearEdge || scrollIdle() > 5 || r > 0.82;
     return isIntent ? 'scta-intent' : 'scta-full';
   }
@@ -241,6 +242,14 @@ function animateCount(el, target, prefix, suffix, duration) {
     }
   });
 
+  // Click: smooth scroll to final CTA instead of navigating away
+  action && action.addEventListener('click', e => {
+    e.preventDefault();
+    if (window.fbq) fbq('track', 'Lead');
+    const target = document.getElementById('final-cta');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
   function frame(ts) {
     if (lastTs) elapsed += Math.min(ts - lastTs, 250) / 1000;
     lastTs = ts;
@@ -273,7 +282,7 @@ function animateCount(el, target, prefix, suffix, duration) {
   }
 
   /* ── Single carousel ───────────────────────────────────────── */
-  function initCarousel(track, dotsEl) {
+  function initCarousel(track, dotsEl, loop) {
     if (!track) return;
     const items = Array.from(track.children);
     if (items.length < 2) return;
@@ -360,10 +369,18 @@ function animateCount(el, target, prefix, suffix, duration) {
           const distToEnd = dir === 1 ? max - pos : pos;
 
           if (distToEnd <= 0.5) {
-            // Hit endpoint — hold then reverse
-            holding = true;
-            dir = -dir;
-            holdTimer = setTimeout(() => { holding = false; }, HOLD_MS);
+            if (loop && dir === 1) {
+              // Loop: instant jump back to start, brief pause, keep going forward
+              track.scrollLeft = 0;
+              pos = 0;
+              holding = true;
+              holdTimer = setTimeout(() => { holding = false; }, 300);
+            } else {
+              // Bounce: reverse direction
+              holding = true;
+              dir = -dir;
+              holdTimer = setTimeout(() => { holding = false; }, HOLD_MS);
+            }
           } else {
             // Cosine deceleration near endpoints
             const speed = SPEED_MAX * easeNear(distToEnd);
@@ -382,10 +399,10 @@ function animateCount(el, target, prefix, suffix, duration) {
   }
 
   /* ── Wire up ───────────────────────────────────────────────── */
-  initCarousel(document.querySelector('.trust-stats-grid'),  null);
-  initCarousel(document.getElementById('process-track'),     document.getElementById('process-dots'));
-  initCarousel(document.querySelector('.feat-small-cards'),  null);
-  initCarousel(document.querySelector('.stats-bar-grid'),    null);
+  initCarousel(document.querySelector('.trust-stats-grid'),  null,  false);
+  initCarousel(document.getElementById('process-track'),     document.getElementById('process-dots'), false);
+  initCarousel(document.querySelector('.feat-small-cards'),  null,  true);  // loop, not bounce
+  initCarousel(document.querySelector('.stats-bar-grid'),    null,  false);
 }());
 
 // ─── Video Player — §06 — click-to-play state machine ───
@@ -409,8 +426,76 @@ function animateCount(el, target, prefix, suffix, duration) {
     btn.setAttribute('aria-label', LABELS[next] || 'Lancer la démo');
   }
 
+  // Lazy-load video src on first interaction
+  let srcLoaded = false;
+  function ensureSrc() {
+    if (srcLoaded) return;
+    srcLoaded = true;
+    const dataSrc = video.getAttribute('data-src');
+    if (dataSrc) { video.src = dataSrc; video.load(); }
+  }
+
+  // ── Poster: seek past black opening frames, capture a real frame ──
+  (function () {
+    const posterImg = wrap.querySelector('.vp-poster');
+    if (!posterImg) return;
+
+    const CACHE_KEY = 'cc_vp_poster_v2';  // v2: seek-based, skips black frame 0
+    const src = video.getAttribute('data-src') || 'demo.webm';
+
+    function applyPoster(dataUrl) {
+      posterImg.src = dataUrl;
+      video.poster = dataUrl;
+      posterImg.addEventListener('load', () => posterImg.classList.add('vp-poster-ready'), { once: true });
+      if (posterImg.complete && posterImg.naturalWidth) posterImg.classList.add('vp-poster-ready');
+    }
+
+    // Clear stale v1 cache (black frame)
+    try { sessionStorage.removeItem('cc_vp_poster_v1'); } catch (e) {}
+
+    // Instant on repeat visits (same session)
+    try {
+      const cached = sessionStorage.getItem(CACHE_KEY);
+      if (cached) { applyPoster(cached); return; }
+    } catch (e) {}
+
+    // First visit: load & seek to skip black opening, then capture
+    const v = document.createElement('video');
+    v.muted = true;
+    v.playsInline = true;
+    v.preload = 'auto';  // need decoded pixel data, not just metadata
+
+    v.addEventListener('loadedmetadata', function () {
+      // Seek 1 second in (or 10% through if shorter) — skips black intro frames
+      v.currentTime = Math.min(1.0, (v.duration || 10) * 0.1);
+    }, { once: true });
+
+    v.addEventListener('seeked', function () {
+      try {
+        const w = v.videoWidth || 1280;
+        const h = v.videoHeight || 720;
+        const scale = Math.min(1, 960 / w);
+        const canvas = document.createElement('canvas');
+        canvas.width  = Math.round(w * scale);
+        canvas.height = Math.round(h * scale);
+        canvas.getContext('2d').drawImage(v, 0, 0, canvas.width, canvas.height);
+        let dataUrl = canvas.toDataURL('image/webp', 0.75);
+        if (!dataUrl.startsWith('data:image/webp')) {
+          dataUrl = canvas.toDataURL('image/jpeg', 0.75);
+        }
+        try { sessionStorage.setItem(CACHE_KEY, dataUrl); } catch (e) {}
+        applyPoster(dataUrl);
+      } catch (e) {}
+      v.removeAttribute('src');
+      v.load();
+    }, { once: true });
+
+    v.src = src;
+  }());
+
   // Click: toggle play / pause, or replay on ended
   btn.addEventListener('click', () => {
+    ensureSrc();
     if (wrap.classList.contains('vp-ended')) {
       video.currentTime = 0;
       video.muted = false;
@@ -430,11 +515,113 @@ function animateCount(el, target, prefix, suffix, duration) {
   });
   video.addEventListener('ended', () => setState('vp-ended'));
 
-  // Progress bar — updates on timeupdate
+  // ── Seekable progress bar ──────────────────────
+  const seekBar    = document.getElementById('vp-seek-bar');
+  const bufFill    = document.getElementById('vp-buffer-fill');
+  const handle     = document.getElementById('vp-seek-handle');
+  const tooltip    = document.getElementById('vp-time-tooltip');
+
+  function fmtTime(s) {
+    const m = Math.floor(s / 60);
+    return m + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+  }
+
+  function pctFromEvent(e) {
+    const rect = seekBar.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    return Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+  }
+
+  function applyPct(pct) {
+    if (!progFill) return;
+    const w = (pct * 100).toFixed(2) + '%';
+    progFill.style.width = w;
+    if (handle) handle.style.left = w;
+    if (seekBar) seekBar.setAttribute('aria-valuenow', Math.round(pct * 100));
+  }
+
+  function updateTooltip(pct) {
+    if (!tooltip || !video.duration) return;
+    tooltip.textContent = fmtTime(pct * video.duration);
+    tooltip.style.left = (pct * 100).toFixed(2) + '%';
+  }
+
+  // sync playback progress
   video.addEventListener('timeupdate', () => {
-    if (!progFill || !video.duration) return;
-    progFill.style.width = ((video.currentTime / video.duration) * 100).toFixed(1) + '%';
+    if (!video.duration) return;
+    const pct = video.currentTime / video.duration;
+    applyPct(pct);
   });
+
+  // sync buffer
+  video.addEventListener('progress', () => {
+    if (!bufFill || !video.duration || !video.buffered.length) return;
+    bufFill.style.width = ((video.buffered.end(video.buffered.length - 1) / video.duration) * 100).toFixed(2) + '%';
+  });
+
+  // hover tooltip (no drag)
+  if (seekBar) {
+    seekBar.addEventListener('mousemove', (e) => {
+      if (seekBar.classList.contains('vp-dragging')) return;
+      updateTooltip(pctFromEvent(e));
+    });
+
+    // click to seek
+    seekBar.addEventListener('click', (e) => {
+      if (!video.duration) return;
+      const pct = pctFromEvent(e);
+      video.currentTime = pct * video.duration;
+      applyPct(pct);
+    });
+
+    // drag to seek (mouse)
+    let dragging = false;
+    seekBar.addEventListener('mousedown', (e) => {
+      dragging = true;
+      seekBar.classList.add('vp-dragging');
+      updateTooltip(pctFromEvent(e));
+      e.preventDefault();
+    });
+    document.addEventListener('mousemove', (e) => {
+      if (!dragging || !video.duration) return;
+      const pct = pctFromEvent(e);
+      applyPct(pct);
+      updateTooltip(pct);
+    });
+    document.addEventListener('mouseup', (e) => {
+      if (!dragging) return;
+      dragging = false;
+      seekBar.classList.remove('vp-dragging');
+      if (video.duration) video.currentTime = pctFromEvent(e) * video.duration;
+    });
+
+    // drag to seek (touch)
+    seekBar.addEventListener('touchstart', (e) => {
+      seekBar.classList.add('vp-dragging');
+      updateTooltip(pctFromEvent(e));
+      e.preventDefault();
+    }, { passive: false });
+    seekBar.addEventListener('touchmove', (e) => {
+      if (!video.duration) return;
+      const pct = pctFromEvent(e);
+      applyPct(pct);
+      updateTooltip(pct);
+      e.preventDefault();
+    }, { passive: false });
+    seekBar.addEventListener('touchend', (e) => {
+      seekBar.classList.remove('vp-dragging');
+      if (video.duration && e.changedTouches.length) {
+        video.currentTime = Math.max(0, Math.min(1, (e.changedTouches[0].clientX - seekBar.getBoundingClientRect().left) / seekBar.getBoundingClientRect().width)) * video.duration;
+      }
+    });
+
+    // keyboard seek (←/→ 5s)
+    seekBar.addEventListener('keydown', (e) => {
+      if (!video.duration) return;
+      if (e.key === 'ArrowLeft')  video.currentTime = Math.max(0, video.currentTime - 5);
+      if (e.key === 'ArrowRight') video.currentTime = Math.min(video.duration, video.currentTime + 5);
+    });
+  }
 
   // Show real duration once metadata loads
   video.addEventListener('loadedmetadata', () => {
@@ -475,8 +662,8 @@ function animateCount(el, target, prefix, suffix, duration) {
   function scrollIdle() { return elapsed - lastScroll; }
 
   function resolveState(r, t) {
-    if (t < 3.2 || r < 0.12) return 'mcta-hidden';
-    if (r < 0.42) return 'mcta-peek';
+    if (t < 3.2 || r < 0.22) return 'mcta-hidden';
+    if (r < 0.50) return 'mcta-peek';
     if (r > 0.76 || scrollIdle() > 7) return 'mcta-intent';
     return 'mcta-full';
   }
@@ -509,4 +696,166 @@ function animateCount(el, target, prefix, suffix, duration) {
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+}());
+
+// ─── Sticky Header — Smart Visibility ────────────
+(function () {
+  const header   = document.getElementById('sticky-header');
+  if (!header) return;
+
+  const hero     = document.getElementById('hero-section');
+  const finalCta = document.getElementById('final-cta');
+  let ticking    = false;
+  let b          = {};
+
+  function recalc() {
+    const sy = window.scrollY;
+    b = {
+      heroEnd:  hero     ? hero.getBoundingClientRect().bottom  + sy : 600,
+      finalTop: finalCta ? finalCta.getBoundingClientRect().top + sy : Infinity,
+    };
+  }
+
+  function update() {
+    const y         = window.scrollY;
+    const pastHero  = y > b.heroEnd  - 60;
+    const nearFinal = y + window.innerHeight * 0.20 >= b.finalTop;
+    const show      = pastHero && !nearFinal;
+
+    header.classList.toggle('sh-visible', show);
+    header.setAttribute('aria-hidden', show ? 'false' : 'true');
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+
+  window.addEventListener('resize', () => { recalc(); update(); }, { passive: true });
+
+  recalc();
+  update();
+}());
+
+// ─── Final CTA — Periodic micro-nudge ────────────
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var btn = document.querySelector('.cta-final');
+  if (!btn) return;
+
+  var NUDGE_INTERVAL = 8000; // ms between nudges
+  var NUDGE_DURATION =  720; // matches CSS animation duration
+  var timer    = null;
+  var inView   = false;
+  var entered  = false;
+
+  function nudge() {
+    if (!inView || document.hidden || btn.matches(':hover')) return;
+    btn.classList.remove('cta-nudge-active');
+    void btn.offsetWidth; // force reflow — restarts the animation
+    btn.classList.add('cta-nudge-active');
+    setTimeout(function () { btn.classList.remove('cta-nudge-active'); }, NUDGE_DURATION);
+  }
+
+  function startCycle() {
+    clearInterval(timer);
+    timer = setInterval(nudge, NUDGE_INTERVAL);
+  }
+
+  function stopCycle() {
+    clearInterval(timer);
+    timer = null;
+    btn.classList.remove('cta-nudge-active');
+  }
+
+  // Entry + nudge cycle driven by IntersectionObserver
+  var io = new IntersectionObserver(function (entries) {
+    inView = entries[0].isIntersecting;
+    if (inView) {
+      // Entry animation — once only
+      if (!entered) {
+        entered = true;
+        btn.classList.add('cta-entering');
+        setTimeout(function () { btn.classList.remove('cta-entering'); }, 600);
+      }
+      // First nudge after a short settle delay, then repeat
+      setTimeout(function () { nudge(); startCycle(); }, 1600);
+    } else {
+      stopCycle();
+    }
+  }, { threshold: 0.5 });
+
+  io.observe(btn);
+
+  // Pause cycle while hovering so nudge never fights with hover state
+  btn.addEventListener('mouseenter', stopCycle);
+  btn.addEventListener('mouseleave', function () { if (inView) startCycle(); });
+}());
+
+// ── Hero video: poster extraction + deferred src injection ──────────────────
+// On first visit  : video src injected after first paint → no render-blocking download
+// On repeat visits: poster applied instantly from sessionStorage → zero black flash
+(function () {
+  var isMobile  = window.matchMedia('(max-width: 767px)').matches;
+  var heroEl    = document.getElementById('hero-section');
+  var videoEl   = document.getElementById(isMobile ? 'hero-video-mobile' : 'hero-video-desktop');
+  if (!videoEl || !heroEl) return;
+
+  var source  = videoEl.querySelector('source[data-src]');
+  var srcUrl  = source && source.getAttribute('data-src');
+  if (!srcUrl) return;
+
+  var KEY = 'cc_hero_v1_' + (isMobile ? 'm' : 'd');
+
+  function applyPoster(url) {
+    videoEl.poster = url;
+    heroEl.style.backgroundImage    = 'url(' + url + ')';
+    heroEl.style.backgroundSize     = 'cover';
+    heroEl.style.backgroundPosition = isMobile ? 'center center' : 'right center';
+  }
+
+  // ① Apply cached poster instantly — eliminates black flash on repeat visits
+  try {
+    var hit = sessionStorage.getItem(KEY);
+    if (hit) applyPoster(hit);
+  } catch (e) {}
+
+  // ② Inject video src after first paint — doesn't block initial render
+  function startVideo() {
+    if (source.src) return;
+    source.src = srcUrl;
+    videoEl.load();
+    videoEl.play().catch(function () {});
+  }
+  requestAnimationFrame(function () { requestAnimationFrame(startVideo); });
+
+  // ③ Extract poster after window.load — piggybacks on the already-loaded video
+  window.addEventListener('load', function () {
+    if (sessionStorage.getItem(KEY)) return;  // cache already warm
+    var v = document.createElement('video');
+    v.muted = true;
+    v.playsInline = true;
+    v.preload = 'auto';
+    v.addEventListener('loadedmetadata', function () {
+      v.currentTime = Math.min(0.5, (v.duration || 5) * 0.05);
+    }, { once: true });
+    v.addEventListener('seeked', function () {
+      try {
+        var iw = v.videoWidth || 750, ih = v.videoHeight || 1334;
+        var sc = Math.min(1, 960 / iw);
+        var c  = document.createElement('canvas');
+        c.width  = Math.round(iw * sc);
+        c.height = Math.round(ih * sc);
+        c.getContext('2d').drawImage(v, 0, 0, c.width, c.height);
+        var url = c.toDataURL('image/webp', 0.72);
+        if (!url.startsWith('data:image/webp')) url = c.toDataURL('image/jpeg', 0.72);
+        try { sessionStorage.setItem(KEY, url); } catch (e) {}
+        applyPoster(url);
+      } catch (e) {}
+      v.removeAttribute('src');
+      v.load();
+    }, { once: true });
+    v.src = srcUrl;
+  }, { once: true });
 }());
