@@ -7,7 +7,7 @@
    Slow wave-breathing grid · Cursor proximity reveal
    Passive, engineered, below perceptual dominance
 ───────────────────────────────────────────────── */
-// Meta Lead tracking for all registration CTAs.
+// Meta custom lead tracking for all registration CTAs.
 (function () {
   function normalize(value) {
     return (value || '').replace(/\s+/g, ' ').trim();
@@ -17,6 +17,7 @@
     return {
       content_name: cta.dataset.ctaId || '',
       content_category: 'landing_page_cta',
+      custom_event_name: cta.dataset.metaEventName || '',
       cta_id: cta.dataset.ctaId || '',
       cta_location: cta.dataset.ctaLocation || '',
       cta_label: cta.dataset.ctaLabel || normalize(cta.textContent),
@@ -27,7 +28,8 @@
 
   function trackLeadCta(cta) {
     if (!cta || !window.fbq) return;
-    fbq('track', 'Lead', buildPayload(cta));
+    const customEventName = cta.dataset.metaEventName || cta.dataset.ctaId || 'lead-cta';
+    fbq('trackCustom', customEventName, buildPayload(cta));
   }
 
   window.trackLeadCta = trackLeadCta;

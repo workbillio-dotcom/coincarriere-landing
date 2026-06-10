@@ -83,7 +83,12 @@ git push origin main
 | Event | Trigger | Parameters |
 |-------|---------|------------|
 | `PageView` | Page load | Meta Pixel default page-view payload |
-| `Lead` | Registration CTA click | `cta_id`, `cta_location`, `cta_label`, `cta_destination`, `content_name`, `content_category`, `page_path` |
+| `lead-sticky-header` | Sticky header registration CTA click | `cta_id`, `cta_location`, `cta_label`, `cta_destination`, `content_name`, `content_category`, `custom_event_name`, `page_path` |
+| `lead-hero` | Hero registration CTA click | `cta_id`, `cta_location`, `cta_label`, `cta_destination`, `content_name`, `content_category`, `custom_event_name`, `page_path` |
+| `lead-final-cta` | Final section registration CTA click | `cta_id`, `cta_location`, `cta_label`, `cta_destination`, `content_name`, `content_category`, `custom_event_name`, `page_path` |
+| `lead-mobile-sticky-peek` | Mobile peek CTA click | `cta_id`, `cta_location`, `cta_label`, `cta_destination`, `content_name`, `content_category`, `custom_event_name`, `page_path` |
+| `lead-mobile-sticky-primary` | Mobile primary CTA click | `cta_id`, `cta_location`, `cta_label`, `cta_destination`, `content_name`, `content_category`, `custom_event_name`, `page_path` |
+| `lead-smart-floating` | Smart floating CTA click | `cta_id`, `cta_location`, `cta_label`, `cta_destination`, `content_name`, `content_category`, `custom_event_name`, `page_path` |
 
 ## Pages & Routes
 
