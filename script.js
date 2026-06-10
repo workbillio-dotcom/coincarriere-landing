@@ -7,6 +7,38 @@
    Slow wave-breathing grid · Cursor proximity reveal
    Passive, engineered, below perceptual dominance
 ───────────────────────────────────────────────── */
+// Meta Lead tracking for all registration CTAs.
+(function () {
+  function normalize(value) {
+    return (value || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function buildPayload(cta) {
+    return {
+      content_name: cta.dataset.ctaId || '',
+      content_category: 'landing_page_cta',
+      cta_id: cta.dataset.ctaId || '',
+      cta_location: cta.dataset.ctaLocation || '',
+      cta_label: cta.dataset.ctaLabel || normalize(cta.textContent),
+      cta_destination: cta.getAttribute('href') || '',
+      page_path: window.location.pathname || '/',
+    };
+  }
+
+  function trackLeadCta(cta) {
+    if (!cta || !window.fbq) return;
+    fbq('track', 'Lead', buildPayload(cta));
+  }
+
+  window.trackLeadCta = trackLeadCta;
+
+  document.addEventListener('click', function (event) {
+    const cta = event.target.closest && event.target.closest('[data-meta-lead-cta]');
+    if (!cta) return;
+    trackLeadCta(cta);
+  });
+}());
+
 (function () {
   const canvas = document.getElementById('blueprint-canvas');
   if (!canvas) return;
@@ -245,7 +277,6 @@ function animateCount(el, target, prefix, suffix, duration) {
   // Click: smooth scroll to final CTA instead of navigating away
   action && action.addEventListener('click', e => {
     e.preventDefault();
-    if (window.fbq) fbq('track', 'Lead');
     const target = document.getElementById('final-cta');
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });

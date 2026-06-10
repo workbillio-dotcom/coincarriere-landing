@@ -78,6 +78,13 @@ git push origin main
 |----------|----------|-------------|
 | Meta Pixel ID | `1005445558723330` in `index.html` line 26 | Facebook/Meta tracking pixel |
 
+## Tracking Events
+
+| Event | Trigger | Parameters |
+|-------|---------|------------|
+| `PageView` | Page load | Meta Pixel default page-view payload |
+| `Lead` | Registration CTA click | `cta_id`, `cta_location`, `cta_label`, `cta_destination`, `content_name`, `content_category`, `page_path` |
+
 ## Pages & Routes
 
 | Route | File | Description |
