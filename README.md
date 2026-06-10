@@ -76,7 +76,7 @@ git push origin main
 
 | Variable | Location | Description |
 |----------|----------|-------------|
-| Meta Pixel ID | `index.html` line 27 | Facebook/Meta tracking pixel |
+| Meta Pixel ID | `1005445558723330` in `index.html` line 26 | Facebook/Meta tracking pixel |
 
 ## Pages & Routes
 
