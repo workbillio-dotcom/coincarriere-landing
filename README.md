@@ -8,6 +8,8 @@ Professional recruitment platform for the BTP (Construction) sector in Morocco. 
 - **CSS3** — custom design system (`style.css`) + Tailwind CSS (CDN)
 - **Vanilla JavaScript** — animations, scroll effects, video interactions (`script.js`)
 - **Meta Pixel** — conversion tracking
+- **Google Analytics 4** — traffic analytics
+- **Microsoft Clarity** — behavioral analytics
 - **Google Fonts** — Sora, JetBrains Mono
 
 ## Project Structure
@@ -77,12 +79,16 @@ git push origin main
 | Variable | Location | Description |
 |----------|----------|-------------|
 | Meta Pixel ID | `1005445558723330` in `index.html` line 26 | Facebook/Meta tracking pixel |
+| GA4 Measurement ID | `G-PHR7VPCJZT` in `index.html` | Google Analytics tracking tag |
+| Microsoft Clarity ID | `x5229nswva` in `index.html` | Microsoft Clarity tracking tag |
 
 ## Tracking Events
 
 | Event | Trigger | Parameters |
 |-------|---------|------------|
 | `PageView` | Page load | Meta Pixel default page-view payload |
+| GA4 `page_view` | Page load | GA4 default config payload for `G-PHR7VPCJZT` |
+| Microsoft Clarity session | Page load | Clarity default session analytics for `x5229nswva` |
 | `lead-sticky-header` | Sticky header registration CTA click | `cta_id`, `cta_location`, `cta_label`, `cta_destination`, `content_name`, `content_category`, `custom_event_name`, `page_path` |
 | `lead-hero` | Hero registration CTA click | `cta_id`, `cta_location`, `cta_label`, `cta_destination`, `content_name`, `content_category`, `custom_event_name`, `page_path` |
 | `lead-final-cta` | Final section registration CTA click | `cta_id`, `cta_location`, `cta_label`, `cta_destination`, `content_name`, `content_category`, `custom_event_name`, `page_path` |
