@@ -44,22 +44,56 @@
 // Meta ViewContent tracking after the user starts scrolling.
 (function () {
   let hasTracked = false;
+  let hasScrolled = false;
+  let retryTimer = null;
+  let retryCount = 0;
+  const maxRetries = 40;
+
+  function buildPayload() {
+    return {
+      content_name: 'landing_page_scroll',
+      content_category: 'landing_page',
+      page_path: window.location.pathname || '/',
+    };
+  }
 
   function currentScrollY() {
     return window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
   }
 
-  function trackViewContentOnScroll() {
-    if (hasTracked || currentScrollY() <= 0) return;
+  function clearRetry() {
+    if (!retryTimer) return;
+    window.clearTimeout(retryTimer);
+    retryTimer = null;
+  }
+
+  function scheduleRetry() {
+    if (retryTimer || retryCount >= maxRetries) return;
+    retryTimer = window.setTimeout(function () {
+      retryTimer = null;
+      retryCount += 1;
+      sendViewContent();
+    }, 250);
+  }
+
+  function sendViewContent() {
+    if (hasTracked || !hasScrolled) return;
+    if (typeof window.fbq !== 'function') {
+      scheduleRetry();
+      return;
+    }
+
     hasTracked = true;
+    clearRetry();
     window.removeEventListener('scroll', trackViewContentOnScroll);
 
-    if (!window.fbq) return;
-    fbq('track', 'ViewContent', {
-      content_name: 'landing_page_scroll',
-      content_category: 'landing_page',
-      page_path: window.location.pathname || '/',
-    });
+    fbq('track', 'ViewContent', buildPayload());
+  }
+
+  function trackViewContentOnScroll() {
+    if (hasTracked || currentScrollY() <= 0) return;
+    hasScrolled = true;
+    sendViewContent();
   }
 
   window.addEventListener('scroll', trackViewContentOnScroll, { passive: true });
