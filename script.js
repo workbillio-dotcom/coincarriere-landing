@@ -276,13 +276,6 @@ function animateCount(el, target, prefix, suffix, duration) {
     }
   });
 
-  // Click: smooth scroll to final CTA instead of navigating away
-  action && action.addEventListener('click', e => {
-    e.preventDefault();
-    const target = document.getElementById('final-cta');
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-
   function frame(ts) {
     if (lastTs) elapsed += Math.min(ts - lastTs, 250) / 1000;
     lastTs = ts;
