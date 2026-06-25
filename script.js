@@ -41,6 +41,30 @@
   });
 }());
 
+// Meta ViewContent tracking after the user starts scrolling.
+(function () {
+  let hasTracked = false;
+
+  function currentScrollY() {
+    return window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  }
+
+  function trackViewContentOnScroll() {
+    if (hasTracked || currentScrollY() <= 0) return;
+    hasTracked = true;
+    window.removeEventListener('scroll', trackViewContentOnScroll);
+
+    if (!window.fbq) return;
+    fbq('track', 'ViewContent', {
+      content_name: 'landing_page_scroll',
+      content_category: 'landing_page',
+      page_path: window.location.pathname || '/',
+    });
+  }
+
+  window.addEventListener('scroll', trackViewContentOnScroll, { passive: true });
+}());
+
 (function () {
   const canvas = document.getElementById('blueprint-canvas');
   if (!canvas) return;

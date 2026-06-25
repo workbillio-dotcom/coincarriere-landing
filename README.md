@@ -87,6 +87,7 @@ git push origin main
 | Event | Trigger | Parameters |
 |-------|---------|------------|
 | `PageView` | Page load | Meta Pixel default page-view payload |
+| `ViewContent` | First user scroll | `content_name`, `content_category`, `page_path` |
 | GA4 `page_view` | Page load | GA4 default config payload for `G-PHR7VPCJZT` |
 | Microsoft Clarity session | Page load | Clarity default session analytics for `x5229nswva` |
 | `lead-sticky-header` | Sticky header registration CTA click | `cta_id`, `cta_location`, `cta_label`, `cta_destination`, `content_name`, `content_category`, `custom_event_name`, `page_path` |
